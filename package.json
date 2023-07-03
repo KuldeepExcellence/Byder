@@ -18,7 +18,10 @@
     "react-native": "0.70.10",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-reanimated": "^3.3.0",
+<<<<<<< HEAD
     "react-native-responsive-screen": "^1.4.2",
+=======
+>>>>>>> 21454a74c323b2e33791aabf9f9de18422083cd9
     "react-native-safe-area-context": "^4.6.3",
     "react-native-screens": "^3.22.0"
   },
