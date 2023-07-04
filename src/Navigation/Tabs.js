@@ -2,71 +2,49 @@ import { StyleSheet, Text, View,Image } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../Screens/Home/Home';
-const Tabs = () => {
-  const Tab = createBottomTabNavigator();
+import Search from '../Screens/Search/Search';
+import Waterdrop from '../Screens/Waterdrop/Waterdrop';
+import Wishlist from '../Screens/Wishlist/Wishlist';
+import Profile from '../Screens/Profile/Profile';
+const Tab = createBottomTabNavigator();
+
+const BottomTabs = () => {
+ 
   return (
   <>
-    <Tab.Navigator 
-    tabBarOption={{
-      activeTintColor:"#1a1a1a",
-    }}
-   screenOptions={{
-    headerStyle:{
-      backgroundColor:'#1a1a1a', 
-      // activeTintColor:"white",
-    },
-    headerTitleStyle: {
-      color: 'white'
-    },
-    tabBarStyle: {
-      backgroundColor: '#1a1a1a',
-  },
-
-
-   }}
-
-    >
-      <Tab.Screen name="Home" component={Home} options={{
-        tabBarIcon: ({ color, focused }) =>
-          <Image style={styles.tinyLogo} source={require('../Assets/plussign.png')} tintColor={focused ? '#3399ff' : '#666666'} />
-      
-        // headerShown: false,
+  <Tab.Navigator>
+    <Tab.Screen name='Home' component={Home} options={{ headerShown: false ,
+       tabBarIcon: ({ color, focused }) =>
+       <Image style={styles.tinyLogo} source={require('../Assets/home.png')} tintColor={focused ? '#FF66C4' : '#666666'}  />
+     
       }}
-      />
-      {/* <Tab.Screen name="TV Tracker" component={Home}/> */}
-
-      {/* <Tab.Screen name="Countdown" component={Countdown} options={{
-        tabBarIcon: ({ color, focused }) =>
-          <Image style={styles.tinyLogo} source={require()} tintColor={focused ? '#3399ff' : '#666666'} />,
-          // header: props => <CustomHeader {...props} />,
-        headerShown: false,
-      }}
-      />
-
-      <Tab.Screen name="Find" component={Find} options={{
-        tabBarIcon: ({ color, focused }) =>
-          <Image style={styles.tinyLogo} source={require()} tintColor={focused ? '#3399ff' : '#666666'} />
-        
-        // headerShown: false,
-      }}
-      />
-
-      <Tab.Screen name="More" component={More} options={{
-        tabBarIcon: ({ color, focused }) =>
-          <Image style={styles.tinyLogo} source={require()} tintColor={focused ? '#3399ff' : '#666666'} />
-        
-        
-        // headerShown: false,
-      }}
-      /> */}
-
-
-    </Tab.Navigator>
-  
+       />
+    <Tab.Screen name='Search' component={Search} options={{ headerShown: false ,
+     tabBarIcon: ({ color, focused }) =>
+     <Image style={styles.tinyLogo} source={require('../Assets/search.png')} tintColor={focused ? '#FF66C4' : '#666666'} />
+    }}/>
+    <Tab.Screen name='Waterdrop' component={Waterdrop} options={{ headerShown: false ,
+     tabBarIcon: ({ color, focused }) =>
+     <Image style={styles.tinyLogo} source={require('../Assets/drop.png')} tintColor={focused ? '#3399ff' : '#666666'} />
+    }}/>
+    <Tab.Screen name='Wishlist' component={Wishlist} options={{ headerShown: false,
+      tabBarIcon: ({ color, focused }) =>
+      <Image style={styles.tinyLogo} source={require('../Assets/heart-rate.png')} tintColor={focused ? '#FF66C4' : '#666666'} />
+    }}/>
+    <Tab.Screen name='Profile' component={Profile} options={{ headerShown: false ,
+      tabBarIcon: ({ color, focused }) =>
+      <Image style={styles.tinyLogo} source={require('../Assets/user.png')} tintColor={focused ? '#FF66C4' : '#666666'} />
+    }}/>
+  </Tab.Navigator>
   </>
   )
 }
 
-export default Tabs
+export default BottomTabs
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  tinyLogo: {
+    height: 24,
+    width: 24,
+  },
+})
