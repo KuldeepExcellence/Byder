@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-// import MyProfile from '../DrawerNavigation/MyProfile/MyProfile'
-// import HomeMain from './HomeMain/HomeMain';
+
 import CustomDrawer from './CustomDrawer';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import BottomTabs from './Tabs';
+import SignOut from '../Screens/SignOut/SignOut';
 
 
 
@@ -32,6 +32,7 @@ const Home = (props) => {
 }
 
 const DrawerNavigation = (props, item) => {
+
  
   return (
     <Drawer.Navigator
@@ -42,26 +43,30 @@ const DrawerNavigation = (props, item) => {
         headerShown: false,
         drawerActiveTintColor: '#fff',
         drawerInactiveTintColor: '#fff',
+        drawerActiveBackgroundColor:'#000',
         drawerLabelStyle: {
           fontSize: hp('1.9%'),
 
         }
       }}
     >
-      <Drawer.Screen name="BottomTabs" component={BottomTabs}
-        // options={{
-        //   drawerIcon: ({ color }) => (
-        //     <Image style={styles.iconsPng} source={require('../../assets/home.png')} />
-        //   ),
-        // }}
+    
+      <Drawer.Screen name="Home" component={BottomTabs}
+     
+        options={{
+          drawerIcon: ({ color }) => (
+            <Image style={styles.iconsPng} source={require('../Assets/homeSide.png')} tintColor='#fff' />
+          ),
+        }}
       />
-      {/* <Drawer.Screen name="MyProfile" component={MyProfile}
-        // options={{
-        //   drawerIcon: ({ color }) => (
-        //     <Image style={styles.iconsPng} source={require('../../assets/userprofile.png')} />
-        //   ),
-        // }}
-      /> */}
+   
+      <Drawer.Screen name="Sign Out" component={SignOut}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Image style={styles.iconsPng} source={require('../Assets/logout.png')} tintColor='#fff' />
+          ),
+        }}
+      />
 
     </Drawer.Navigator>
 
