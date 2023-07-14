@@ -1,25 +1,22 @@
-import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity ,ScrollView , Dimensions } from 'react-native'
+import { StyleSheet, Text, View ,StatusBar, Image, TouchableOpacity ,ScrollView , Dimensions } from 'react-native'
 import React from 'react'
 
 import Swiper from 'react-native-swiper';
-
-import { LightYellow } from '../Components/ColorConst/ColorConst'
-import { MainBlack } from '../Components/ColorConst/ColorConst'
-import { White } from '../Components/ColorConst/ColorConst'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { style } from 'deprecated-react-native-prop-types/DeprecatedTextPropTypes'
-import Topbarback from '../Components/Topbarback'
+import Topbarback from '../../Components/Topbarback'
+import { LightYellow, White } from '../../Components/ColorConst/ColorConst';
 
 
-const DetailSearch = ({navigation}) => {
-
+const RelatedProducts = ({navigation}) => {
+    
     const ImageSlider = () => {
         const images = [
-          require('../Assets/image1.png'),
-          require('../Assets/image2.png'),
-          require('../Assets/image3.png'),
-          require('../Assets/shoe.png'),
-          require('../Assets/image1.png'),
+          require('../../Assets/image1.png'),
+          require('../../Assets/image2.png'),
+          require('../../Assets/image3.png'),
+          require('../../Assets/shoe.png'),
+          require('../../Assets/image1.png'),
         ];
       
         return (
@@ -33,23 +30,23 @@ const DetailSearch = ({navigation}) => {
         );
       };
 
-    return (
-        <>
-            <StatusBar backgroundColor={'#000'} />
+  return (
+  <>
+   <StatusBar backgroundColor={'#000'} />
             <Topbarback Textheading={'ADIMATIC'} navigation={navigation} />
           
             <ScrollView>
                 <View style={styles.main2}>
                     <View style={styles.txtmain1}>
                         <TouchableOpacity style={styles.txtbo} onPress={()=>navigation.navigate('SeeInStore')}>
-                            <Image style={styles.img} source={require('../Assets/location.png')} />
+                            <Image style={styles.img} source={require('../../Assets/location.png')} />
                             <Text style={styles.txtv}>
                                 Ver en tienda
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.txtbo2} onPress={()=>navigation.navigate('CompareOnline')}>
                      
-                            <Image style={styles.imgs} source={require('../Assets/shopping-cart.png')} />
+                            <Image style={styles.imgs} source={require('../../Assets/shopping-cart.png')} />
                             <Text style={styles.txtv}>
                                 Comprar online
                             </Text>
@@ -73,12 +70,16 @@ const DetailSearch = ({navigation}) => {
                         </View>
                     </View>
                     <View style={styles.shoebac}>
-                      
-                      
-                    <ImageSlider/>
-                        {/* <Image style={styles.shoeimg} source={require('../Assets/shoe.png')} /> */}
+
+
+<ImageSlider/>
+
+                        {/* <Image style={styles.shoeimg} source={require('../../Assets/shoe.png')} /> */}
+                        
+                        
+                        
                         <View>
-                            <Image style={styles.heimg1} source={require('../Assets/heartwhite.png')} />
+                            <Image style={styles.heimg1} source={require('../../Assets/heartwhite.png')} />
                         </View>
                     </View>
                     <View style={styles.hrline} />
@@ -90,42 +91,42 @@ const DetailSearch = ({navigation}) => {
                                     <TouchableOpacity onPress={()=>navigation.navigate('RelatedProducts')}>
                                     <View style={styles.imgfl}>
                                         <View >
-                                            <Image style={styles.img1} source={require('../Assets/image1.png')} />
+                                            <Image style={styles.img1} source={require('../../Assets/image1.png')} />
                                           <Text style={styles.txtonimg}>PASSVET MEN CAPTEK..</Text>
                                           <Text  style={styles.txton7}>75.00</Text>
                                         </View>
-                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
+                                        <Image style={styles.imgh} source={require('../../Assets/heartwhite.png')} />
                                     </View>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.txman}>
                                     <View style={styles.imgfl}>
                                         <View>
-                                        <Image style={styles.img2} source={require('../Assets/image2.png')} />
+                                        <Image style={styles.img2} source={require('../../Assets/image2.png')} />
                                         <Text style={styles.txtonimg2}>HEAVEN BY MARC JAC..</Text>
                                         <Text  style={styles.txton7}>85.00</Text>
                                         </View>
-                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
+                                        <Image style={styles.imgh} source={require('../../Assets/heartwhite.png')} />
                                 </View>
                                 </View>
                                 <View style={styles.txman}>
                                     <View style={styles.imgfl}>
                                         <View>
-                                        <Image style={styles.img3} source={require('../Assets/image3.png')} />
+                                        <Image style={styles.img3} source={require('../../Assets/image3.png')} />
                                         <Text style={styles.txtonimg3}>PASSVET MEN CAPTEK.</Text>
                                         <Text  style={styles.txton7}>75.00</Text>
                                         </View>
-                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
+                                        <Image style={styles.imgh} source={require('../../Assets/heartwhite.png')} />
                                     </View>
                                 </View>
                                 <View style={styles.txman}>
                                     <View style={styles.imgfl}>
                                         <View>
-                                        <Image style={styles.img1} source={require('../Assets/image1.png')} />
+                                        <Image style={styles.img1} source={require('../../Assets/image1.png')} />
                                         <Text style={styles.txtonimg}>PASSVET MEN CAPTEK..</Text>
                                         <Text  style={styles.txton7}>85.00</Text>
                                         </View>
-                                       <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
+                                       <Image style={styles.imgh} source={require('../../Assets/heartwhite.png')} />
                                     </View>
                                 </View>
                             </View>
@@ -135,15 +136,16 @@ const DetailSearch = ({navigation}) => {
             </ScrollView>
             <View style={styles.mainbutt}>
             <TouchableOpacity style={styles.circl}>
-                <Image style={styles.heimg} source={require('../Assets/heart.png')} />
+                <Image style={styles.heimg} source={require('../../Assets/heart.png')} />
             </TouchableOpacity>
             </View>
           
-            {/* <View style={{backgroundColor:'#15181e',marginBottom:hp('10%')}}/> */}
-        </>
-    )
+  </>
+  )
 }
-export default DetailSearch
+
+export default RelatedProducts
+
 const styles = StyleSheet.create({
     main2: {
         flex: 1,
@@ -289,7 +291,7 @@ const styles = StyleSheet.create({
     heimg1: {
         height: hp('2.5%'),
         width: wp('5%'),
-        marginLeft: hp('0.5%'),
+        marginLeft: hp('1%'),
         marginTop: hp('2%'),
     },
     txtprod: {
@@ -370,6 +372,11 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
 
+
+
+
+
+
     wrapper: {},
     slide: {
       flex: 1,
@@ -381,4 +388,5 @@ const styles = StyleSheet.create({
       height: '100%',
     },
 
+    
 })

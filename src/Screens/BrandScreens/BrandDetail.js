@@ -49,7 +49,7 @@ const BrandDetail = ({ navigation }) => {
                 </View>
                 <ImageBackground source={item.image} style={styles.image} />
               </View>
-              <TouchableOpacity onPress={()=>navigation.navigate('Details')}>
+              <TouchableOpacity onPress={()=>navigation.navigate('DetailSearch')}>
               <View style={{ marginLeft: hp('2%') }}>
                 <Text style={styles.textColor}>BRADHY</Text>
                 <Text style={styles.txtclr}>Leggings Mocha</Text>
@@ -68,7 +68,7 @@ const BrandDetail = ({ navigation }) => {
         <>
             <StatusBar backgroundColor={'#000'} />
             <Topbarback Textheading={'220V'} navigation={navigation} />
-            <ScrollView>
+           
                 <View style={styles.searcmain}>
                     <View style={styles.srchmainim}>
                         <View style={styles.serchm}>
@@ -83,7 +83,9 @@ const BrandDetail = ({ navigation }) => {
                         />
                     </View>
                 </View>
+                <ScrollView>
                 <View style={styles.main}>
+                <Text style={styles.headingtxt}>ACCESORIOS</Text>
                 <FlatList
             showsHorizontalScrollIndicator={false}
             data={data1}
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     },
     serchm: {
         height: 36,
-        backgroundColor: '#333333',
+        backgroundColor: '#373739',
         width: wp('12%'),
         marginTop: hp('0.6%'),
         marginLeft: hp('2%'),
@@ -130,23 +132,23 @@ const styles = StyleSheet.create({
         border: 'none',
     },
     main: {
-        backgroundColor: '#333333',
+        backgroundColor: '#15181e',
         height: hp('110%'),
         width: wp('100%'),
     },
     maincard: {
         width: wp('47%'),
-        borderRadius: 20,
-        height: hp('30%'),
-        backgroundColor: '#221D28',
+        borderRadius: 10,
+        height: hp('33.5%'),
+        backgroundColor: '#1e222b',
         marginBottom: wp('2%'),
       },
       Imagecontainer: {
         width: wp('46.5%'),
         height: hp('20%'),
         backgroundColor: '#fff',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         // alignItems: 'center',
         justifyContent: 'center',
         resizeMode: 'cover',
@@ -183,17 +185,20 @@ const styles = StyleSheet.create({
       textColor: {
         color: LightYellow,
         fontWeight: '500',
-        fontSize: 13
+        fontSize: hp('1.9%'),
+        marginTop: hp('0.4%'),
       },
       txtclr: {
         color: White,
         fontWeight: '500',
-        fontSize: 10,
+        fontSize: hp('2.1%'),
+        marginTop: hp('0.1%'),
       },
       txtdlr: {
-        color: '#404040',
+        color: '#616267',
         fontWeight: '500',
-        fontSize: 12,
+        fontSize: hp('1.9%'),
+        marginTop: hp('0.1%'),
       },
       maintx: {
         flexDirection: 'row',
@@ -203,7 +208,14 @@ const styles = StyleSheet.create({
       txtclr1:{
         color: White,
         fontWeight: '500',
-        fontSize: 10,
+        fontSize: hp('1.8%'),
         marginRight:hp('2%'),
+      },
+      headingtxt:{
+        color: 'white',
+        fontWeight: '500',
+        fontSize: hp('2.2%'), 
+        marginLeft:hp('1.2%'),
+         marginVertical:hp('0.4%'),
       },
 })

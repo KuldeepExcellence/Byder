@@ -10,9 +10,9 @@ import ReserveOrder from "../Screens/ReserveOrder/ReserveOrder";
 import BrandDetail from "../Screens/BrandScreens/BrandDetail";
 import BrandSeeAll from "../Screens/BrandScreens/BrandSeeAll";
 import EditPrefrence from "../Screens/Profile/EditPrefrence";
-import Support from "../Screens/Profile/Support";
 import Onboarding from "../Screens/Onboarding/Onboarding";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+// import Waterdrop from "../Screens/Waterdrop/Waterdrop";
 
 const Stack = createStackNavigator();
 
@@ -70,13 +70,14 @@ const MainNavigation = () => {
           </>
           )}
             <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="DetailSearch" component={DetailSearch} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="ReserveOrder" component={ReserveOrder} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="BrandDetail" component={BrandDetail} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="BrandSeeAll" component={BrandSeeAll} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="EditPrefrence" component={EditPrefrence} options={{ headerShown: false }}></Stack.Screen>
-            <Stack.Screen name="Support" component={Support} options={{ headerShown: false }}></Stack.Screen>
-
+            {/* <Stack.Screen name="DetailSearch" component={DetailSearch} options={{ headerShown: false }}></Stack.Screen> */}
+            {/* <Stack.Screen name="ReserveOrder" component={ReserveOrder} options={{ headerShown: false }}></Stack.Screen> */}
+            {/* <Stack.Screen name="BrandDetail" component={BrandDetail} options={{ headerShown: false }}></Stack.Screen>
+            <Stack.Screen name="BrandSeeAll" component={BrandSeeAll} options={{ headerShown: false }}></Stack.Screen> */}
+            {/* <Stack.Screen name="EditPrefrence" component={EditPrefrence} options={{ headerShown: false }}></Stack.Screen> */}
+            {/* <Stack.Screen name="Support" component={Support} options={{ headerShown: false }}></Stack.Screen> */}
+            {/* <Stack.Screen name="SupportDescription" component={SupportDescription} options={{ headerShown: false }}></Stack.Screen> */}
+            {/* <Stack.Screen name="Waterdrop" component={Waterdrop} options={{ headerShown: false }}></Stack.Screen> */}
            
         </Stack.Navigator>
         )

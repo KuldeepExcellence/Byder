@@ -21,7 +21,7 @@ const ReserveOrder = ({ navigation }) => {
 
                 <ScrollView>
                     <View style={styles.cardMain}>
-                        <TouchableOpacity style={styles.imgmain}>
+                        <TouchableOpacity style={styles.imgmain} onPress={()=>navigation.navigate('MyReserveDetail')}>
                             <ImageBackground source={require('../../Assets/image1.png')} style={styles.backimg}>
                                 <View style={styles.discountMain}>
                                     <Text style={styles.txtb}>TICKET EN REVISION</Text>

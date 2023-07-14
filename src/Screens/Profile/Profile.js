@@ -15,10 +15,14 @@ const Profile = ({navigation}) => {
         <ScrollView style={styles.MainFlex}>
           <View style={styles.MainImgView}>
           <Image source={require('../../Assets/jacket.png')} style={styles.ProfileImg} />
-
-          <Text style={styles.txtName}>Byder Team</Text>
-          <View style={styles.hrWidth}/>
+            <View style={{marginLeft:hp('4.2%')}}>
+            <Text style={styles.txtName}>Byder Team</Text>
+            <Text style={[styles.txtName,{fontSize:hp('1.9%')}]}>Byderteam@gmail.com</Text>
+            </View>
+          
+         
           </View>
+          <View style={styles.hrWidth}/>
           <View style={styles.mainWallet}>
           <Text style={[styles.txtName,{marginTop:hp('1.2%')}]}>Byder Wallet</Text>
           <Text style={[styles.txtName,{marginTop:hp('0.1%'),fontSize: hp('2%'),color:'#737373'}]}>Reembolsis Acumulados</Text>
@@ -38,12 +42,12 @@ const Profile = ({navigation}) => {
           <View style={styles.hrWidth}/>
          </View>
 
-         <TouchableOpacity style={styles.ListView} onPress={()=>navigation.navigate('Wishlist')}>
+         {/* <TouchableOpacity style={styles.ListView} onPress={()=>navigation.navigate('Wishlist')}>
          <Text style={styles.txtList}>ListA de desoes</Text>
          <View style={styles.circleView}>
          <Image source={require('../../Assets/heart.png')} style={styles.ListImg} />
          </View>
-         </TouchableOpacity>
+         </TouchableOpacity> */}
 
          <TouchableOpacity style={styles.ListView} onPress={()=>navigation.navigate('ReserveOrder')}>
          <Text style={styles.txtList}>Mis Pedidos y  Reservas</Text>
@@ -82,16 +86,17 @@ export default Profile
 const styles = StyleSheet.create({
   MainFlex: {
     flex: 1,
-    backgroundColor: sidebarBlack,
+    backgroundColor: '#15181e',
     padding: 10
   },
   MainImgView:{
-    justifyContent: 'center',
+    flexDirection:'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   ProfileImg:{
-    height: hp('18%'),
-    width: wp('36%'),
+    height: hp('8%'),
+    width: wp('16%'),
     borderRadius:999,
     marginVertical:hp('1.2%')
   },
@@ -106,7 +111,9 @@ const styles = StyleSheet.create({
     height: hp('0.3%'),
     width: wp('91.5%'),
     backgroundColor: '#737373',
-    marginTop:hp('2.2%')
+    marginTop:hp('2.2%'),
+    // marginLeft:hp('2.2%'),
+    alignSelf:'center'
   },
   hrWidthsecond:{
     height: hp('0.3%'),
@@ -148,9 +155,9 @@ const styles = StyleSheet.create({
     width: wp('92.5%'),
     marginTop:hp('2.2%'),
     borderWidth:1,
-    borderColor:'#737373',
+    borderColor:'#5f6560',
     borderRadius:10,
-    backgroundColor:'#556562eb',
+    backgroundColor:'#16191f',
     padding:8
   },
   txtmsg:{

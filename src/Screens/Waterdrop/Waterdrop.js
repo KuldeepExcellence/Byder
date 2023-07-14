@@ -1,10 +1,10 @@
 
 import React, { useRef } from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
+import { View, Text, StyleSheet, Dimensions, Image, StatusBar } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { sidebarBlack,LightYellow } from '../../Components/ColorConst/ColorConst';
+import { sidebarBlack, LightYellow } from '../../Components/ColorConst/ColorConst';
 import Topbar from '../../Components/Topbar';
 
 
@@ -84,7 +84,7 @@ const photoCards = [
 ]
 
 const height = Dimensions.get('window').height
-const Waterdrop = ({navigation}) => {
+const Waterdrop = ({ navigation }) => {
   const useSwiper = useRef(null).current
   const handleOnSwipedLeft = () => useSwiper.swipeLeft()
   const handleOnSwipedTop = () => useSwiper.swipeTop()
@@ -112,25 +112,25 @@ const Waterdrop = ({navigation}) => {
             <Text style={styles.pricetxt}>112.00 $</Text>
             <Text style={styles.locationtxt}>A 75.32155</Text>
           </View>
-          <View style={styles.hrWidth}/>
-       
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-         style={styles.viewNext}
-            onPress={handleOnSwipedLeft}
-          >
-            <Image source={require('../../Assets/arrowTinder.png')} tintColor='#ff0000' style={{ height: 20, width: 20 }} />
-          </TouchableOpacity>
+          <View style={styles.hrWidth} />
 
-          <TouchableOpacity
-           style={[styles.viewNext,{backgroundColor:'#ccffcc'}]}
-            onPress={handleOnSwipedRight}
-            color="white"
-            backgroundColor="#E5566D"
-          >
-            <Image source={require('../../Assets/heart.png')} tintColor='#79ff4d' style={{ height: 20, width: 20 }} />
-          </TouchableOpacity>
-          {/* <TouchableOpacity
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity
+              style={styles.viewNext}
+              onPress={handleOnSwipedLeft}
+            >
+              <Image source={require('../../Assets/arrowTinder.png')} tintColor='#ff0000' style={{ height: 20, width: 20 }} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.viewNext, { backgroundColor: '#ccffcc' }]}
+              onPress={handleOnSwipedRight}
+              color="white"
+              backgroundColor="#E5566D"
+            >
+              <Image source={require('../../Assets/heart.png')} tintColor='#79ff4d' style={{ height: 20, width: 20 }} />
+            </TouchableOpacity>
+            {/* <TouchableOpacity
             // name="star"
             onPress={handleOnSwipedTop}
             color="white"
@@ -146,7 +146,7 @@ const Waterdrop = ({navigation}) => {
           >
             <Image source={require('../../Assets/heart.png')} style={{ height: 40, width: 50 }} />
           </TouchableOpacity> */}
-        </View>
+          </View>
         </View>
       </View>
 
@@ -157,81 +157,48 @@ const Waterdrop = ({navigation}) => {
 
   return (
     <>
-     <Topbar Textheading={'Inicio'} navigation={navigation} />
-      <Swiper
-        ref={useSwiper}
-        animateCardOpacity
-        containerStyle={styles.container}
-        cards={photoCards}
-        renderCard={card => <Card card={card} />}
-        cardIndex={0}
-        backgroundColor="white"
-        stackSize={2}
-        infinite
-        showSecondCard
-        animateOverlayLabelsOpacity
-      // overlayLabels={{
-      //   left: {
-      //     title: 'NOPE',
-      //     element: <OverlayLabel label="NOPE" color="#E5566D" />,
-      //     style: {
-      //       wrapper: styles.overlayWrapper,
-      //     },
-      //   },
-      //   right: {
-      //     title: 'LIKE',
-      //     element: <OverlayLabel label="LIKE" color="#4CCC93" />,
-      //     style: {
-      //       wrapper: {
-      //         ...styles.overlayWrapper,
-      //         alignItems: 'flex-start',
-      //         marginLeft: 30,
-      //       },
-      //     },
-      //   },
-      // }}
-      />
+      <StatusBar backgroundColor={'#000'} />
+      <View >
+        <Topbar Textheading={'Mi Perfil'} navigation={navigation} />
+      </View>
+      <View style={styles.MainFlex}>
+        <View>
 
+     
+        <Swiper
+          ref={useSwiper}
+          animateCardOpacity
+          containerStyle={styles.container}
+          cards={photoCards}
+          renderCard={card => <Card card={card} />}
+          cardIndex={0}
+          backgroundColor="white"
+          stackSize={2}
+          infinite
+          showSecondCard
+          animateOverlayLabelsOpacity
+        />
+           </View>
+      </View>
 
     </>)
 }
 export default Waterdrop
 
 const styles = StyleSheet.create({
-  overlayLabel: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    borderWidth: 2,
-    borderRadius: 10,
+  MainFlex: {
+    flex: 1,
+    backgroundColor: '#15181e',
+    padding: 10
   },
-  overlayLabelText: {
-    fontSize: 25,
-    fontFamily: 'Avenir',
-    textAlign: 'center',
-  },
-  singleButton: {
-    backgroundColor: 'transparent',
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowRadius: 6,
-    shadowOpacity: 0.3,
-    elevation: 2,
-    padding: 15,
-  },
-
   card: {
     /* Setting the height according to the screen height, it also could be fixed value or based on percentage. In this example, this worked well on Android and iOS. */
-    height: height - 150,
+    height: height - 180,
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor: sidebarBlack,
+    backgroundColor: '#15181e',
+    borderWidth:0.6,
+    borderColor:'#000',
     borderRadius: 5,
     shadowColor: 'black',
     shadowOffset: {
@@ -239,16 +206,17 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowRadius: 6,
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.9,
     elevation: 2,
+
   },
 
   imgView: {
-    height: hp('54%'),
+    height: hp('48%'),
     width: wp('89.6%'),
-    alignItems:"center",
+    alignItems: "center",
     backgroundColor: '#fff',
-    justifyContent:'center'
+    justifyContent: 'center'
   },
   image: {
 
@@ -258,59 +226,59 @@ const styles = StyleSheet.create({
   photoDescriptionContainer: {
     // alignItems:"flex-start",
     // justifyContent:'flex-start',
-    paddingLeft:15,
-    paddingTop:6
+    paddingLeft: 15,
+    paddingTop: 6
 
   },
-  text: { 
+  text: {
     fontSize: hp('2.5%'),
     color: 'white',
-    fontWeight:"700",
+    fontWeight: "700",
     fontFamily: 'Avenir',
     textShadowColor: 'black',
     textShadowRadius: 10,
   },
-  txtprlocation:{
-    flexDirection:'row',
-    alignItems:"center",
-    justifyContent:"flex-start",
-    marginVertical:hp('0.3%')
+  txtprlocation: {
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginVertical: hp('0.3%')
   },
 
-  pricetxt:{
+  pricetxt: {
     fontSize: hp('2.4%'),
     color: LightYellow,
-    fontWeight:"600",
+    fontWeight: "600",
     fontFamily: 'Avenir',
     textShadowColor: 'black',
   },
-  locationtxt:{
+  locationtxt: {
     fontSize: hp('2.4%'),
     color: 'white',
-    fontWeight:"600",
+    fontWeight: "600",
     fontFamily: 'Avenir',
     textShadowColor: 'black',
-    marginLeft:wp('30%')
+    marginLeft: wp('30%')
   },
-  hrWidth:{
+  hrWidth: {
     height: hp('0.4%'),
     width: wp('79.5%'),
     backgroundColor: '#808080',
-    marginVertical:hp('1.5%')
+    marginVertical: hp('1.5%')
   },
   buttonsContainer: {
     flexDirection: 'row',
-    alignItems:"center",
-    justifyContent:"space-between",
-    marginRight:wp('5.5%')
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginRight: wp('5.5%')
   },
-  viewNext:{
+  viewNext: {
     height: hp('5.4%'),
     width: wp('38%'),
     backgroundColor: '#ffb3b3',
-    marginVertical:hp('1.5%'),
-    borderRadius:12,
-    alignItems:"center",
-    justifyContent:"center",
+    marginVertical: hp('1.5%'),
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
   },
 })

@@ -24,8 +24,8 @@ const Home = (props) => {
 
     <Stack.Navigator screenOptions={{ headerShown: false }} >
     
-      <Stack.Screen name='HomeMain' component={HomeMain} />
-      {/* <Stack.Screen name="ChooseServices" component={ChooseServices} options={{ headerShown: false }} /> */}
+      <Stack.Screen name='Home' component={Home} />
+      {/* <Stack.Screen name="Waterdrop" component={Waterdrop} options={{ headerShown: false }}></Stack.Screen> */}
      
     </Stack.Navigator>
   )
@@ -60,13 +60,13 @@ const DrawerNavigation = (props, item) => {
         }}
       />
    
-      <Drawer.Screen name="Sign Out" component={SignOut}
+      {/* <Drawer.Screen name="Sign Out" component={SignOut}
         options={{
           drawerIcon: ({ color }) => (
             <Image style={styles.iconsPng} source={require('../Assets/logout.png')} tintColor='#fff' />
           ),
         }}
-      />
+      /> */}
 
     </Drawer.Navigator>
 
@@ -81,8 +81,8 @@ export default DrawerNavigation
 
 const styles = StyleSheet.create({
   iconsPng: {
-    height: hp('3.2%'),
-    width: wp('6.4%')
+    height: hp('2.5%'),
+    width: wp('5%')
   }
 
 })

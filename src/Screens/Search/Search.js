@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, StatusBar, Image, ImageBackground, FlatList, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { LightYellow, MainBlack, White } from '../../Components/ColorConst/ColorConst'
 import Topbar from '../../Components/Topbar'
 import Inputsearch from '../../Components/Inputsearch'
@@ -10,6 +10,7 @@ import { resizeMode } from 'deprecated-react-native-prop-types/DeprecatedImagePr
 import { ScrollView } from 'react-native-gesture-handler'
 import DetailSearch from '../../DetailSearch/DetailSearch'
 
+
 const data1 = [
   {
 
@@ -18,7 +19,7 @@ const data1 = [
   {
     // title: "In turpis",
     // body: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    image: require('../../Assets/image2.png'),
+    image: require('../../Assets/image3.png'),
   },
   {
     // title: "Lorem Ipsum",
@@ -41,10 +42,22 @@ const data1 = [
   },
 ];
 
-const Search = ({ data,navigation }) => {
+const Search = ({ data, navigation }) => {
   const [toggleButtonDay, setToggleButtonDay] = useState(false)
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
 
 
+
+  const dataa = [
+    { label: 'Male', value: 'male' },
+    { label: 'Female', value: 'female' },
+    { label: 'Other', value: 'other' },
+  ];
+
+
+
+ 
   const Getdata = ({ item, index }) => {
 
 
@@ -53,27 +66,28 @@ const Search = ({ data,navigation }) => {
 
       <View style={{ padding: 2 }}>
         <View style={styles.maincard}>
-          <TouchableOpacity onPress={()=>navigation.navigate('DetailSearch')} style={styles.Imagecontainer}>
+          <View style={styles.Imagecontainer}>
             <View style={styles.mainpr}>
-            <View style={styles.per}>
-           <Text style={styles.txtper}>-40%</Text>
-            </View>
-            <View>
-              <Image style={styles.heartim} source={require('../../Assets/heart.png')} />
-            </View>
+              <View style={styles.per}>
+                <Text style={styles.txtper}>-40%</Text>
+              </View>
+              <View>
+                <Image style={styles.heartim} source={require('../../Assets/heart.png')} />
+              </View>
             </View>
             <ImageBackground source={item.image} style={styles.image} />
-          </TouchableOpacity>
-          <View style={{ marginLeft: hp('2%') }}>
-            <Text style={styles.textColor}>BRADHY</Text>
-            <Text style={styles.txtclr}>Leggings Mocha</Text>
-            <Text style={styles.txtdlr}>$49.70</Text>
-            <View style={styles.maintx}>
-              <Text style={styles.txtclr}>Centro</Text>
-              <Text style={styles.txtclr1}>7101.4km</Text>
-            </View>
           </View>
-
+          <TouchableOpacity onPress={() => navigation.navigate('DetailSearch')}>
+            <View style={{ marginLeft: hp('2%') }}>
+              <Text style={styles.textColor}>BRADHY</Text>
+              <Text style={styles.txtclr}>Leggings Mocha</Text>
+              <Text style={styles.txtdlr}>49.70 €</Text>
+              <View style={styles.maintx}>
+                <Text style={styles.txtclr}>Centro</Text>
+                <Text style={styles.txtclr1}>7101.4km</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -82,10 +96,10 @@ const Search = ({ data,navigation }) => {
 
   return (
     <>
-    
-        <StatusBar backgroundColor={'#000'} />
-        <Topbar Textheading={'Buscar'} navigation={navigation} />
-        <ScrollView>
+
+      <StatusBar backgroundColor={'#000'} />
+      <Topbar Textheading={'Buscar'} navigation={navigation} />
+      <ScrollView>
         <View style={styles.MainFlx}>
           <View>
             <Inputsearch />
@@ -108,6 +122,75 @@ const Search = ({ data,navigation }) => {
               />
             </View>
           </View>
+
+          <View>
+
+
+            <View style={styles.topViewSolo}>
+
+
+              <Image source={require('../../Assets/price-tag.png')} style={styles.ListImg} />
+              <Text style={styles.txtList}>Solo articulos con descuento </Text>
+            </View>
+
+            <View style={styles.mainnn}>
+            <View style={styles.ll}>
+              <Image style={styles.mi} source={require('../../Assets/minus.png')} />
+            </View>
+            <View style={styles.hom}>
+              <Text style={styles.homtx}>
+                HOMBRE
+              </Text>
+            </View>
+            <View style={styles.muj}>
+              <Text style={styles.mujtx}>
+                MUJER
+              </Text>
+            </View>
+          </View>
+
+
+          <TouchableOpacity onPress={() => navigation.navigate('favorites')}>
+            <View style={styles.ree}>
+              <View style={styles.r1}>
+              </View>
+              <Image style={styles.de} source={require('../../Assets/down.png')} />
+            </View>
+          </TouchableOpacity>
+          <Text style={styles.txtHead}>Elege una o mas categorias</Text>
+
+          {/* <View style={styles.border}>
+              <Dropdown
+                style={[styles.dropdown, isFocus && { borderColor: '#969696' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                // itemTextStyle={{color:"#000"}}
+                data={dataa}
+                maxHeight={170}
+                labelField="label"
+                valueField="value"
+                placeholder='placeholder'
+             
+                value={value}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                  setValue(item.value);
+                  setIsFocus(false);
+                }} />
+            </View> */}
+
+          <TouchableOpacity onPress={() => navigation.navigate('favorites')}>
+            <View style={styles.ree}>
+              <View style={styles.r1}>
+              </View>
+              <Image style={styles.de} source={require('../../Assets/down.png')} />
+            </View>
+          </TouchableOpacity>
+
+          </View>
+
+
           <View style={styles.hrline} />
 
           <Text style={styles.txttoda}>Todas las prendas</Text>
@@ -137,13 +220,19 @@ export default Search
 const styles = StyleSheet.create({
   MainFlx: {
     flex: 1,
-    backgroundColor: '#333333',
+    backgroundColor: '#15181e',
     padding: 10
   },
   txtmo: {
     color: White,
     marginTop: hp('2%'),
     fontSize: hp('2.2%'),
+  },
+  txtHead:{
+    color: '#707173',
+    fontSize: hp('1.9%'),
+    marginVertical:hp('1%'),
+    fontWeight:'500'
   },
   txt0: {
     color: '#737373',
@@ -190,23 +279,40 @@ const styles = StyleSheet.create({
 
   maincard: {
     width: wp('47%'),
-    borderRadius: 20,
-    height: hp('30%'),
-    backgroundColor: '#221D28',
+    borderRadius: 10,
+    height: hp('33.5%'),
+    backgroundColor: '#1e222b',
     marginBottom: wp('2%'),
   },
   Imagecontainer: {
-
     width: wp('46.5%'),
     height: hp('20%'),
     backgroundColor: '#fff',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     // alignItems: 'center',
     justifyContent: 'center',
     resizeMode: 'cover',
-
-
+  },
+  mainpr: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: hp('-10.2%'),
+  },
+  per: {
+    backgroundColor: LightYellow,
+    width: wp('8.8%'),
+    height: hp('2.5%'),
+    borderRadius: 7,
+  },
+  txtper: {
+    fontSize: 12,
+  },
+  heartim: {
+    height: hp('3%'),
+    width: wp('5.7%'),
   },
   image: {
     width: wp('44%'),
@@ -220,48 +326,121 @@ const styles = StyleSheet.create({
   textColor: {
     color: LightYellow,
     fontWeight: '500',
-    fontSize: 13
+    fontSize: hp('1.9%'),
+    marginTop: hp('0.4%'),
   },
   txtclr: {
     color: White,
     fontWeight: '500',
-    fontSize: 10,
+    fontSize: hp('2.1%'),
+    marginTop: hp('0.1%'),
   },
   txtdlr: {
-    color: '#404040',
+    color: '#616267',
     fontWeight: '500',
-    fontSize: 12,
+    fontSize: hp('1.9%'),
+    marginTop: hp('0.1%'),
   },
   maintx: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  per:{
-    backgroundColor:LightYellow,
-    width:wp('8.8%'),
-    height:hp('2.5%'),
-    borderRadius:7,
-  },
-  txtper:{
-    fontSize: 12,
-  },
-  heartim:{
-    height:hp('3%'),
-    width:wp('5.7%'),
-  },
-  mainpr:{
-    padding:10,
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
-    marginTop:hp('-10.2%'),
-  },
-  txtclr1:{
+  txtclr1: {
     color: White,
     fontWeight: '500',
-    fontSize: 10,
-    marginRight:hp('2%'),
+    fontSize: hp('1.8%'),
+    marginRight: hp('2%'),
+  },
+  topViewSolo: {
+    width: wp('94%'),
+    height: hp('5.5%'),
+    backgroundColor: '#2d332d',
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  txtList: {
+    fontSize: hp('2.1%'),
+    color: '#d2f39f',
+    fontWeight: "700",
+    marginLeft: hp('2%'),
+  },
+  ListImg: {
+    height: hp('2.5%'),
+    width: wp('5%'),
+    tintColor: LightYellow
+  },
+  mainnn: {
+    flexDirection: 'row',
+    marginTop: hp('2.7%'),
+    marginBottom:hp('2.7%'),
+    backgroundColor:'#333333',
+    width: wp('94%'),
+    borderRadius: 7,
+  },
+  ll: {
+    backgroundColor: '#666666',
+    height: hp('5%'),
+    width: wp('12%'),
+    // marginLeft: hp('2%'),
+    borderRadius: 10,
+  },
+  mi: {
+    alignSelf: 'center',
+    marginTop: hp('1.5%'),
+  },
+  hom: {
+    backgroundColor: '#333333',
+    height: hp('4%'),
+    width: wp('35%'),
+    marginLeft: hp('0.5%'),
+    // borderRadius: 20,
+  },
+  homtx: {
+    color:White,
+    fontWeight: '600',
+    marginTop: hp('1.1%'),
+    alignSelf: 'center',
+  },
+  muj: {
+    backgroundColor: '#333333',
+    height: hp('4%'),
+    width: wp('35%'),
+    marginLeft: hp('0.5%'),
+    // borderRadius: 20,
+  },
+  mujtx: {
+    color: White,
+    fontWeight: '600',
+    marginTop: hp('1.1%'),
+    alignSelf: 'center',
+  },
+  ree: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#333333',
+    padding: 12,
+    height: hp('6%'),
+    width: wp('95%'),
+    borderRadius: 10,
+    alignSelf: 'center',
+  },
+  r1: {
+    backgroundColor: '#595959',
+    height: hp('4.5%'),
+    width: wp('9%'),
+    borderRadius: 30,
+    alignSelf: 'center',
+  },
+  de: {
+    alignSelf: 'center',
+    marginTop: hp('0.3%'),
+    width: wp('5.5%'),
+    marginLeft: hp('10.5%'),
+    height: hp('3%'),
   },
 })
 
