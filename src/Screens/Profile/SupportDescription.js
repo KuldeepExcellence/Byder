@@ -9,7 +9,7 @@ const SupportDescription = ({ navigation }) => {
     return (
         <>
             <StatusBar backgroundColor={'#000'} />
-            <Topbar Textheading={'Mi Perfil'} navigation={navigation} />
+            {/* <Topbar Textheading={'Mi Perfil'} navigation={navigation} /> */}
             <ScrollView style={styles.MainFlex}>
                 <View>
                     <Text style={styles.txtxview}>Escribenos tu Mensaje</Text>

@@ -10,7 +10,7 @@ const Support = ({ navigation }) => {
   return (
     <>
       <StatusBar backgroundColor={'#000'} />
-      <Topbar Textheading={'Mi Perfil'} navigation={navigation} />
+      {/* <Topbar Textheading={'Mi Perfil'} navigation={navigation} /> */}
       <ScrollView style={styles.MainFlex}>
 
 

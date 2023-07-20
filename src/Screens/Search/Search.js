@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, StatusBar, Image, ImageBackground, FlatList, TouchableOpacity } from 'react-native'
-import React, { useState,useRef } from 'react'
+import { StyleSheet, Text, View, StatusBar, Image, ImageBackground, TextInput, FlatList, TouchableOpacity } from 'react-native'
+import React, { useState, useRef,useEffect, createRef } from 'react'
 import { LightYellow, MainBlack, White } from '../../Components/ColorConst/ColorConst'
 import Topbar from '../../Components/Topbar'
 import Inputsearch from '../../Components/Inputsearch'
@@ -9,8 +9,9 @@ import Cards from '../../Components/Cards'
 import { resizeMode } from 'deprecated-react-native-prop-types/DeprecatedImagePropType'
 import { ScrollView } from 'react-native-gesture-handler'
 import DetailSearch from '../../DetailSearch/DetailSearch'
-
-
+import BottomActionSheet from '../../Components/BottomActionSheet'
+import CustomBrandcategory from '../../Components/CustomBrandcategory'
+import CustombrandSubCat from '../../Components/CustombrandSubCat'
 const data1 = [
   {
 
@@ -42,22 +43,51 @@ const data1 = [
   },
 ];
 
+
 const Search = ({ data, navigation }) => {
   const [toggleButtonDay, setToggleButtonDay] = useState(false)
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
 
 
+  const actionSheetBrand = createRef()
+  const actionSheetCategory = createRef()
+  const actionSheetSubCategory = createRef()
+  const actionSheetSize = createRef()
+  const [text, onChangeText] = React.useState('Useless Text');
+  const [number, onChangeNumber] = React.useState('');
 
-  const dataa = [
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-    { label: 'Other', value: 'other' },
-  ];
 
+  const [hombreBackgroundColor, setHombreBackgroundColor] = useState('#333333');
+  const [mujerBackgroundColor, setMujerBackgroundColor] = useState('#333333');
+  const [imageBackgroundColor, setImageBackgroundColor] = useState('#666666');
 
+  const [genderStatus, setGenderStatus] = useState(null);
 
- 
+  useEffect(() => {
+    // Set the image background as selected by default when the component mounts
+    setImageBackgroundColor('#666666');
+  }, []);
+
+  const onImgPress = () => {
+    setHombreBackgroundColor('#333333');
+    setMujerBackgroundColor('#333333');
+    setImageBackgroundColor('#666666');
+    setGenderStatus(null);
+  };
+
+  const onHombrePress = () => {
+    setHombreBackgroundColor('#666666');
+    setMujerBackgroundColor('#333333');
+    setImageBackgroundColor('#333333');
+    setGenderStatus('HOMBRE');
+  };
+
+  const onMujerPress = () => {
+    setHombreBackgroundColor('#333333');
+    setMujerBackgroundColor('#666666');
+    setImageBackgroundColor('#333333');
+    setGenderStatus('MUJER');
+  };
+
   const Getdata = ({ item, index }) => {
 
 
@@ -98,7 +128,7 @@ const Search = ({ data, navigation }) => {
     <>
 
       <StatusBar backgroundColor={'#000'} />
-      <Topbar Textheading={'Buscar'} navigation={navigation} />
+      {/* <Topbar Textheading={'Buscar'} navigation={navigation} /> */}
       <ScrollView>
         <View style={styles.MainFlx}>
           <View>
@@ -122,6 +152,7 @@ const Search = ({ data, navigation }) => {
               />
             </View>
           </View>
+          {toggleButtonDay ?
 
           <View>
 
@@ -134,61 +165,78 @@ const Search = ({ data, navigation }) => {
             </View>
 
             <View style={styles.mainnn}>
-            <View style={styles.ll}>
-              <Image style={styles.mi} source={require('../../Assets/minus.png')} />
-            </View>
-            <View style={styles.hom}>
-              <Text style={styles.homtx}>
-                HOMBRE
-              </Text>
-            </View>
-            <View style={styles.muj}>
-              <Text style={styles.mujtx}>
-                MUJER
-              </Text>
-            </View>
-          </View>
-
-
-          <TouchableOpacity onPress={() => navigation.navigate('favorites')}>
-            <View style={styles.ree}>
-              <View style={styles.r1}>
+      <TouchableOpacity onPress={onImgPress}>
+        <View style={[styles.ll, { backgroundColor: imageBackgroundColor }]}>
+          <Image
+            style={styles.mi}
+            source={require('../../Assets/minus.png')}
+          />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={onHombrePress}>
+        <View style={[styles.hom, { backgroundColor: hombreBackgroundColor }]}>
+          <Text style={styles.homtx}>HOMBRE</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={onMujerPress}>
+        <View style={[styles.muj, { backgroundColor: mujerBackgroundColor }]}>
+          <Text style={styles.mujtx}>MUJER</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+            {/* <View style={styles.mainnn}>
+              <View style={styles.ll}>
+                <Image style={styles.mi} source={require('../../Assets/minus.png')} />
               </View>
-              <Image style={styles.de} source={require('../../Assets/down.png')} />
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.txtHead}>Elege una o mas categorias</Text>
-
-          {/* <View style={styles.border}>
-              <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: '#969696' }]}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                // itemTextStyle={{color:"#000"}}
-                data={dataa}
-                maxHeight={170}
-                labelField="label"
-                valueField="value"
-                placeholder='placeholder'
-             
-                value={value}
-                onFocus={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
-                onChange={item => {
-                  setValue(item.value);
-                  setIsFocus(false);
-                }} />
+              <View style={styles.hom}>
+                <Text style={styles.homtx}>
+                  HOMBRE
+                </Text>
+              </View>
+              <View style={styles.muj}>
+                <Text style={styles.mujtx}>
+                  MUJER
+                </Text>
+              </View>
             </View> */}
 
-          <TouchableOpacity onPress={() => navigation.navigate('favorites')}>
-            <View style={styles.ree}>
-              <View style={styles.r1}>
-              </View>
-              <Image style={styles.de} source={require('../../Assets/down.png')} />
-            </View>
-          </TouchableOpacity>
+            <Text style={styles.txtHead}>Elege una marca</Text>
 
+            <TouchableOpacity onPress={() => actionSheetBrand.current?.show()}>
+              <View style={styles.ree}>
+                <View style={styles.r1}>
+                </View>
+                <Image style={styles.de} source={require('../../Assets/down.png')} />
+              </View>
+            </TouchableOpacity>
+            <Text style={styles.txtHead}>Elege una o mas categorias</Text>
+            <BottomActionSheet ref={actionSheetBrand} title={'Title'}>
+              < CustomBrandcategory actionSheetBrand={actionSheetBrand} />
+            </BottomActionSheet>
+
+            <TouchableOpacity onPress={() => actionSheetSubCategory.current?.show()}>
+              <View style={styles.ree}>
+                <View style={styles.r1}>
+                </View>
+                <Image style={styles.de} source={require('../../Assets/down.png')} />
+              </View>
+            </TouchableOpacity>
+            <BottomActionSheet ref={actionSheetSubCategory} title={'Title'}>
+              <CustombrandSubCat actionSheetSubCategory={actionSheetSubCategory} />
+            </BottomActionSheet>
+
+            <Text style={styles.txtHead}>Precio maximo</Text>
+            <TextInput
+              style={styles.input1}
+              onChangeText={onChangeNumber}
+              value={number}
+              placeholder="109.99"
+              placeholderTextColor={'#737373'}
+
+            />
           </View>
+          :
+          null }
 
 
           <View style={styles.hrline} />
@@ -218,6 +266,17 @@ const Search = ({ data, navigation }) => {
 export default Search
 
 const styles = StyleSheet.create({
+  input1: {
+    backgroundColor: '#333333',
+    height: 40,
+    // margin: 12,
+    borderWidth: 1,
+    padding: 5,
+    paddingLeft: 14,
+    borderRadius: 10,
+    borderColor: LightYellow,
+
+  },
   MainFlx: {
     flex: 1,
     backgroundColor: '#15181e',
@@ -228,11 +287,11 @@ const styles = StyleSheet.create({
     marginTop: hp('2%'),
     fontSize: hp('2.2%'),
   },
-  txtHead:{
+  txtHead: {
     color: '#707173',
     fontSize: hp('1.9%'),
-    marginVertical:hp('1%'),
-    fontWeight:'500'
+    marginVertical: hp('1%'),
+    fontWeight: '500'
   },
   txt0: {
     color: '#737373',
@@ -376,8 +435,8 @@ const styles = StyleSheet.create({
   mainnn: {
     flexDirection: 'row',
     marginTop: hp('2.7%'),
-    marginBottom:hp('2.7%'),
-    backgroundColor:'#333333',
+    marginBottom: hp('2.7%'),
+    backgroundColor: '#333333',
     width: wp('94%'),
     borderRadius: 7,
   },
@@ -394,23 +453,23 @@ const styles = StyleSheet.create({
   },
   hom: {
     backgroundColor: '#333333',
-    height: hp('4%'),
-    width: wp('35%'),
+    height: hp('4.9%'),
+    width: wp('39%'),
     marginLeft: hp('0.5%'),
-    // borderRadius: 20,
+    borderRadius: 10,
   },
   homtx: {
-    color:White,
+    color: White,
     fontWeight: '600',
     marginTop: hp('1.1%'),
     alignSelf: 'center',
   },
   muj: {
     backgroundColor: '#333333',
-    height: hp('4%'),
-    width: wp('35%'),
+    height: hp('4.9%'),
+    width: wp('41%'),
     marginLeft: hp('0.5%'),
-    // borderRadius: 20,
+    borderRadius: 10,
   },
   mujtx: {
     color: White,

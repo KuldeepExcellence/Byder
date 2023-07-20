@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity ,ScrollView , Dimensions } from 'react-native'
+import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 import React from 'react'
 
 import Swiper from 'react-native-swiper';
@@ -11,44 +11,44 @@ import { style } from 'deprecated-react-native-prop-types/DeprecatedTextPropType
 import Topbarback from '../Components/Topbarback'
 
 
-const DetailSearch = ({navigation}) => {
+
+const DetailSearch = ({ navigation, route }) => {
+    const { item } = route.params
+
+    console.log(item, '111item')
+
 
     const ImageSlider = () => {
-        const images = [
-          require('../Assets/image1.png'),
-          require('../Assets/image2.png'),
-          require('../Assets/image3.png'),
-          require('../Assets/shoe.png'),
-          require('../Assets/image1.png'),
-        ];
-      
+        const imageUrls = item.images.split("|");
+        const images = [ imageUrls];
+
         return (
-          <Swiper style={styles.wrapper} >
-            {images.map((image, index) => (
-              <View key={index} style={styles.slide}>
-                <Image source={image} style={styles.image} resizeMode="cover" />
-              </View>
-            ))}
-          </Swiper>
+            <Swiper style={styles.wrapper} >
+                {imageUrls.map((imageUrl, index) => (
+                    <View key={index} style={styles.slide}>
+                        <Image source={{ uri: imageUrl }} style={styles.image} resizeMode="cover" />
+                    </View>
+             ))}
+            </Swiper>
         );
-      };
+    };
 
     return (
         <>
             <StatusBar backgroundColor={'#000'} />
-            <Topbarback Textheading={'ADIMATIC'} navigation={navigation} />
-          
+            {/* <Topbarback Textheading={'ADIMATIC'} navigation={navigation} /> */}
+
             <ScrollView>
                 <View style={styles.main2}>
                     <View style={styles.txtmain1}>
-                        <TouchableOpacity style={styles.txtbo} onPress={()=>navigation.navigate('SeeInStore')}>
+                        <TouchableOpacity style={styles.txtbo} onPress={() => navigation.navigate('SeeInStore')}>
                             <Image style={styles.img} source={require('../Assets/location.png')} />
                             <Text style={styles.txtv}>
                                 Ver en tienda
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.txtbo2} onPress={()=>navigation.navigate('CompareOnline')}>
-                     
+                        <TouchableOpacity style={styles.txtbo2} onPress={() => navigation.navigate('CompareOnline')}>
+
                             <Image style={styles.imgs} source={require('../Assets/shopping-cart.png')} />
                             <Text style={styles.txtv}>
                                 Comprar online
@@ -59,23 +59,25 @@ const DetailSearch = ({navigation}) => {
                     <View style={styles.txma1}>
                         <Text style={styles.txttt}>42</Text>
                     </View>
-                    <Text style={styles.txtadima}>ADIMATIC</Text>
-                    <Text style={styles.txtADDI}>ADIDAS</Text>
+                    <Text style={styles.txtadima}>{item.name}</Text>
+                    <Text style={styles.txtADDI}>{item.brand}</Text>
                     <View style={styles.txt6main}>
                         <View style={styles.txt66mn}>
                             <View>
-                                <Text style={styles.txt66}>66.00 €</Text>
+                                <Text style={styles.txt66}>{item.current_price} €</Text>
                             </View>
-                            <Text style={styles.txt11}>1̶1̶0̶.0̶0̶ €</Text>
+                            {item.old_price == null ? null :
+                            <Text style={styles.txt11}>{item.old_price} €</Text>
+                         }
                         </View>
                         <View>
                             <Text style={styles.txtA7}>A 7,105.1 km de ti</Text>
                         </View>
                     </View>
                     <View style={styles.shoebac}>
-                      
-                      
-                    <ImageSlider/>
+
+
+                        <ImageSlider />
                         {/* <Image style={styles.shoeimg} source={require('../Assets/shoe.png')} /> */}
                         <View>
                             <Image style={styles.heimg1} source={require('../Assets/heartwhite.png')} />
@@ -87,33 +89,23 @@ const DetailSearch = ({navigation}) => {
                         <ScrollView horizontal>
                             <View style={styles.maina}>
                                 <View style={styles.txman}>
-                                    <TouchableOpacity onPress={()=>navigation.navigate('RelatedProducts')}>
-                                    <View style={styles.imgfl}>
-                                        <View >
-                                            <Image style={styles.img1} source={require('../Assets/image1.png')} />
-                                          <Text style={styles.txtonimg}>PASSVET MEN CAPTEK..</Text>
-                                          <Text  style={styles.txton7}>75.00</Text>
+                                    <TouchableOpacity onPress={() => navigation.navigate('RelatedProducts')}>
+                                        <View style={styles.imgfl}>
+                                            <View >
+                                                <Image style={styles.img1} source={require('../Assets/image1.png')} />
+                                                <Text style={styles.txtonimg}>PASSVET MEN CAPTEK..</Text>
+                                                <Text style={styles.txton7}>75.00</Text>
+                                            </View>
+                                            <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
                                         </View>
-                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
-                                    </View>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.txman}>
                                     <View style={styles.imgfl}>
                                         <View>
-                                        <Image style={styles.img2} source={require('../Assets/image2.png')} />
-                                        <Text style={styles.txtonimg2}>HEAVEN BY MARC JAC..</Text>
-                                        <Text  style={styles.txton7}>85.00</Text>
-                                        </View>
-                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
-                                </View>
-                                </View>
-                                <View style={styles.txman}>
-                                    <View style={styles.imgfl}>
-                                        <View>
-                                        <Image style={styles.img3} source={require('../Assets/image3.png')} />
-                                        <Text style={styles.txtonimg3}>PASSVET MEN CAPTEK.</Text>
-                                        <Text  style={styles.txton7}>75.00</Text>
+                                            <Image style={styles.img2} source={require('../Assets/image2.png')} />
+                                            <Text style={styles.txtonimg2}>HEAVEN BY MARC JAC..</Text>
+                                            <Text style={styles.txton7}>85.00</Text>
                                         </View>
                                         <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
                                     </View>
@@ -121,11 +113,21 @@ const DetailSearch = ({navigation}) => {
                                 <View style={styles.txman}>
                                     <View style={styles.imgfl}>
                                         <View>
-                                        <Image style={styles.img1} source={require('../Assets/image1.png')} />
-                                        <Text style={styles.txtonimg}>PASSVET MEN CAPTEK..</Text>
-                                        <Text  style={styles.txton7}>85.00</Text>
+                                            <Image style={styles.img3} source={require('../Assets/image3.png')} />
+                                            <Text style={styles.txtonimg3}>PASSVET MEN CAPTEK.</Text>
+                                            <Text style={styles.txton7}>75.00</Text>
                                         </View>
-                                       <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
+                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
+                                    </View>
+                                </View>
+                                <View style={styles.txman}>
+                                    <View style={styles.imgfl}>
+                                        <View>
+                                            <Image style={styles.img1} source={require('../Assets/image1.png')} />
+                                            <Text style={styles.txtonimg}>PASSVET MEN CAPTEK..</Text>
+                                            <Text style={styles.txton7}>85.00</Text>
+                                        </View>
+                                        <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} />
                                     </View>
                                 </View>
                             </View>
@@ -134,11 +136,11 @@ const DetailSearch = ({navigation}) => {
                 </View>
             </ScrollView>
             <View style={styles.mainbutt}>
-            <TouchableOpacity style={styles.circl}>
-                <Image style={styles.heimg} source={require('../Assets/heart.png')} />
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.circl}>
+                    <Image style={styles.heimg} source={require('../Assets/heart.png')} />
+                </TouchableOpacity>
             </View>
-          
+
             {/* <View style={{backgroundColor:'#15181e',marginBottom:hp('10%')}}/> */}
         </>
     )
@@ -147,7 +149,7 @@ export default DetailSearch
 const styles = StyleSheet.create({
     main2: {
         flex: 1,
-        backgroundColor: '#221D28',
+        backgroundColor: '#15181e',
         padding: 10,
         // height: hp('124%'),
     },
@@ -219,8 +221,8 @@ const styles = StyleSheet.create({
     txtADDI: {
         color: '#8C8C8C',
         marginLeft: hp('1%'),
-        fontSize: hp('1.6%'),
-        marginTop: hp('-1.1%'),
+        fontSize: hp('1.9%'),
+        marginTop: hp('-0.8%'),
     },
     txt66: {
         color: LightYellow,
@@ -241,6 +243,7 @@ const styles = StyleSheet.create({
     txt11: {
         color: White,
         marginTop: hp('1.6%'),
+        textDecorationLine: 'line-through',
     },
     txt66mn: {
         flexDirection: 'row',
@@ -257,21 +260,21 @@ const styles = StyleSheet.create({
         height: hp('34%'),
         marginTop: hp('6%'),
     },
-    mainbutt:{
+    mainbutt: {
         width: wp('40%'),
         // backgroundColor:'black',
-        alignSelf:'flex-end',
-      alignItems:'flex-end',
-      justifyContent:'flex-end',
-      position:'absolute',
-      bottom: hp('8.5%')
-      },
+        alignSelf: 'flex-end',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        position: 'absolute',
+        bottom: hp('8.5%')
+    },
     circl: {
         backgroundColor: LightYellow,
         height: hp('6.5%'),
         width: wp('13%'),
         borderRadius: 50,
-      
+
     },
     heimg: {
         height: hp('2.5%'),
@@ -301,7 +304,7 @@ const styles = StyleSheet.create({
     maina: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginBottom:hp('6.8%'),
+        marginBottom: hp('6.8%'),
     },
     txman: {
         backgroundColor: '#999999',
@@ -340,31 +343,31 @@ const styles = StyleSheet.create({
     imgfl: {
         flexDirection: 'row',
     },
-    txtonim:{
-        color:White,
+    txtonim: {
+        color: White,
     },
-    txtonimg:{
-       color:White,
-       marginTop:hp('-13%'),
-       alignSelf: 'center',
-       fontSize: hp('2.2%'),
-       fontWeight: '700',
+    txtonimg: {
+        color: White,
+        marginTop: hp('-13%'),
+        alignSelf: 'center',
+        fontSize: hp('2.2%'),
+        fontWeight: '700',
     },
-    txton7:{
-        color:White,
+    txton7: {
+        color: White,
         alignSelf: 'center',
         fontSize: hp('2.2%'),
     },
-    txtonimg2:{
-        color:White,
-        marginTop:hp('-17%'),
+    txtonimg2: {
+        color: White,
+        marginTop: hp('-17%'),
         alignSelf: 'center',
         fontSize: hp('2.1%'),
         fontWeight: '700',
     },
-    txtonimg3:{
-        color:White,
-        marginTop:hp('-17%'),
+    txtonimg3: {
+        color: White,
+        marginTop: hp('-17%'),
         alignSelf: 'center',
         fontSize: hp('2.12%'),
         fontWeight: '700',
@@ -372,13 +375,13 @@ const styles = StyleSheet.create({
 
     wrapper: {},
     slide: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     image: {
-      width: Dimensions.get('window').width,
-      height: '100%',
+        width: Dimensions.get('window').width,
+        height: '100%',
     },
 
 })

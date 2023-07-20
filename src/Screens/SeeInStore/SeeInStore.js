@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Image, TextInput } from 'react-native'
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, ImageBackground,Image, TextInput } from 'react-native'
 import React from 'react'
 import { LightYellow, MainBlack, White } from '../../Components/ColorConst/ColorConst'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -6,7 +6,7 @@ const SeeInStore = ({ navigation }) => {
 
   const [On_Offstatus, setOn_OffStatus] = React.useState('ON');
   const [enableStatus, setEnableStatus] = React.useState(false);
-
+  const [ticketStatus, setTicketStatus] = React.useState(false); //when ticket raise
   return (
     <>
       <StatusBar backgroundColor={'#000'} />
@@ -24,6 +24,8 @@ const SeeInStore = ({ navigation }) => {
       </View>
 
       <View style={styles.main2}>
+      {ticketStatus ?
+      <View>
         <View style={styles.txtman}>
           <Text style={styles.txt5}>5% de reembolso </Text>
           <Text style={styles.txtdesc}>Si comprar en tienda online,padras obtener el{'\n'}reembolso subiendo el ticket de compra en:</Text>
@@ -51,7 +53,23 @@ const SeeInStore = ({ navigation }) => {
             autoCapitalize="characters"
             style={styles.txton} />
         </View>
-
+        </View>
+         :
+        <View>
+            <TouchableOpacity onPress={() => navigation.navigate('StoreSubmit')} style={styles.txman}>
+              <View style={styles.imgfl}>
+                <View>
+                  <ImageBackground style={styles.img3} source={require('../../Assets/image3.png')} >
+                  <Text style={styles.txtonimg3}>PASSVET MEN CAPTEK.</Text>
+                  
+                  </ImageBackground>
+                  <Text style={styles.txton7}>Ticket en revision</Text>
+                </View>
+                {/* <Image style={styles.imgh} source={require('../Assets/heartwhite.png')} /> */}
+              </View>
+            </TouchableOpacity>
+          </View>
+       }
       </View>
     </>
   )
@@ -167,4 +185,39 @@ const styles = StyleSheet.create({
     width: wp('3%'),
     marginLeft: wp("1%"),
   },
+  txman: {
+    backgroundColor: '#939497',
+    height: hp('40%'),
+    width: wp('90%'),
+    borderRadius: 5,
+    alignItems:'center',
+    justifyContent:'center'
+    // margin: 5,
+},
+img3: {
+  // alignSelf: 'center',
+  height: hp('35%'),
+  width: wp('90%'),
+  alignItems:'center',
+  justifyContent:'center'
+},
+imgfl: {
+  flexDirection: 'row',
+},
+txton7:{
+  color:White,
+  alignSelf: 'center',
+  fontSize: hp('1.8%'),
+  alignSelf:'flex-start',
+  marginLeft: wp("4%"),
+  fontWeight:'600'
+},
+
+txtonimg3:{
+  color:White,
+  // marginTop:hp('-17%'),
+  // alignSelf: 'center',
+  fontSize: hp('2.12%'),
+  fontWeight: '700',
+},
 })

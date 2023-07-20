@@ -1,19 +1,63 @@
-import { StyleSheet, Text, View, StatusBar, TextInput, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, StatusBar, TextInput, Image,FlatList, TouchableOpacity } from 'react-native'
+import React , { useEffect, useState }from 'react'
 import Topbarback from '../../Components/Topbarback'
 import { ScrollView } from 'react-native-gesture-handler'
 import { LightYellow, MainBlack, White } from '../../Components/ColorConst/ColorConst'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { Baseurl } from '../../Components/Baseurl'
 
 
 const BrandSeeAll = ({ navigation }) => {
+
   const [text, onChangeText] = React.useState('Useless Text');
   const [number, onChangeNumber] = React.useState('');
+  const [dataBrand, setDataBrand] = useState([])
+  console.log(dataBrand, 'dataBrand')
+  
+  const promotions = () => {
+    fetch(Baseurl + '/api/brand/', {
+      headers: {
+        "Accept": "application/json",
+        'Access-Control-Allow-Headers': '*',
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setDataBrand(json)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  useEffect(() => {
+    promotions()
+  }, [])
+  const Brand = ({ item, index }) => {
+    return (
+      <>
+       <View style={styles.main}>
+         <TouchableOpacity style={styles.mnboxf} onPress={() => navigation.navigate('BrandDetail',{brandId:item.brand})}>
+           <View>
+             <Text style={styles.txt22}>
+             {item.brand}
+             </Text>
+             {item.max_discount ==null ? null :
+             <Text style={styles.txt68}>
+             {item.max_discount}%
+             </Text>
+               }
+           </View>
+           <Image source={{uri:item.image_link}} style={styles.mainbox}/>
+         </TouchableOpacity>
+         <View style={styles.hrline} />
+       </View>
+      </>
+    )
+  }
   return (
     <>
       <StatusBar backgroundColor={'#000'} />
-      <Topbarback navigation={navigation} />
-      
+      {/* <Topbarback navigation={navigation} /> */}
       <View style={styles.searcmain}>
           <View style={styles.srchmainim}>
             <View style={styles.serchm}>
@@ -28,49 +72,18 @@ const BrandSeeAll = ({ navigation }) => {
             />
           </View>
         </View>
-      <ScrollView>
-       
-        <View style={styles.main}>
-          <TouchableOpacity style={styles.mnboxf} onPress={() => navigation.navigate('BrandDetail')}>
-            <View>
-              <Text style={styles.txt22}>
-                220V
-              </Text>
-              <Text style={styles.txt68}>
-                -68%
-              </Text>
-            </View>
-            <View style={styles.mainbox}>
-              <Text style={styles.boxtxt}>220V</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.hrline} />
-
-          <View style={styles.mnboxf}>
-            <View>
-              <Text style={styles.txt22}>
-                40S&SHORTIES
-              </Text>
-              <Text style={styles.txt68}>
-                -40%
-              </Text>
-            </View>
-            <View style={styles.mainbox}>
-              <Text style={styles.boxtxt4}>40s & SHORTIES</Text>
-            </View>
-          </View>
-          <View style={styles.hrline} />
-        </View>
-      </ScrollView>
+        <FlatList
+            data={dataBrand}
+            renderItem={({ item, index }) =>
+              <Brand item={item} index={index}> </Brand>} />
     </>
   )
 }
 export default BrandSeeAll
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
-    backgroundColor: '#15181e',
+    backgroundColor: '#15181E',
   },
   input: {
     backgroundColor: '#333333',
@@ -90,7 +103,7 @@ const styles = StyleSheet.create({
     height: hp('7%'),
   },
   main: {
-    backgroundColor: '#15181e',
+    backgroundColor: '#15181E',
    flex:1,
    flexGrow: 1,
   },
@@ -100,10 +113,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   txt68: {
-    color: '#808080',
+    color: LightYellow,
   },
   mainbox: {
-    backgroundColor: White,
+    // backgroundColor: White,
     height: hp('8%'),
     width: wp('18%'),
     borderRadius: 6,
@@ -121,7 +134,7 @@ const styles = StyleSheet.create({
   hrline: {
     height: hp('0.2%'),
     width: wp('92%'),
-    backgroundColor: '#23262c',
+    backgroundColor: '#23262C',
     // marginTop: hp('1%'),
     alignSelf: 'center',
   },
@@ -150,3 +163,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+

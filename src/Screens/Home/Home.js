@@ -1,7 +1,7 @@
 
 
-import { StyleSheet, Text, View, Image, StatusBar, ScrollView, ImageBackground, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, StatusBar, ScrollView, FlatList,ImageBackground, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { MainBlack } from '../../Components/ColorConst/ColorConst';
 import { LightYellow } from '../../Components/ColorConst/ColorConst';
@@ -9,6 +9,9 @@ import { White } from '../../Components/ColorConst/ColorConst';
 import { Black } from '../../Components/ColorConst/ColorConst';
 import Customcarousel from '../../Components/Customcarousel';
 import Topbar from '../../Components/Topbar';
+import { Baseurl } from '../../Components/Baseurl';
+import Loader from '../../Components/Loader';
+
 const data = [
   {
     image: require('../../Assets/image1.png'),
@@ -24,13 +27,127 @@ const data = [
     image: require('../../Assets/image3.png'),
   },
 ];
+
+
 const Home = ({ navigation }) => {
+
   const isCarousel = React.useRef(null)
+
+  const [dataBrand, setDataBrand] = useState([])
+  const [ropaData, setRopaData] = useState([])
+  const [calzadoData, setCalzadoData] = useState([])
+  const [accessoryData, setAccessoryData] = useState([])
+  
+  const [loaderVisible, setLoaderVisible] = useState(false);
+  // console.log(ropaData, 'dataBrand')
+
+
+  const promotions = () => {
+    setLoaderVisible(true)
+    fetch(Baseurl + '/api/brand/', {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setLoaderVisible(false)
+        setDataBrand(json)
+      })
+      .catch((error) => {
+        setLoaderVisible(false)
+        console.error(error)
+      })
+  }
+  const RopaData = () => {
+    setLoaderVisible(true)
+    fetch(Baseurl + '/api/product/category/ROPA/', {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setLoaderVisible(false)
+        setRopaData(json)
+      })
+      .catch((error) => {
+        setLoaderVisible(false)
+        console.error(error)
+      })
+  }
+  const CalzadoData = () => {
+    setLoaderVisible(true)
+    fetch(Baseurl + '/api/product/category/CALZADO/', {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setLoaderVisible(false)
+        setCalzadoData(json)
+      })
+      .catch((error) => {
+        setLoaderVisible(false)
+        console.error(error)
+      })
+  }
+  const AccessoryData = () => {
+    setLoaderVisible(true)
+    fetch(Baseurl + '/api/product/category/ACCESORIOS/', {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setLoaderVisible(false)
+        setAccessoryData(json)
+      })
+      .catch((error) => {
+        setLoaderVisible(false)
+        console.error(error)
+      })
+  }
+
+  useEffect(() => {
+    
+    promotions();
+    RopaData();
+    CalzadoData();
+    AccessoryData();
+
+  }, [])
+
+
+  const Brand = ({ item, index }) => {
+    // console.log(item.image_link,'item.image_link')
+
+    return (
+      <>
+        <View style={styles.Mainb}>
+          <TouchableOpacity style={styles.txmanb} onPress={() => navigation.navigate('BrandDetail',{brandId:item.brand})}>
+            <ImageBackground source={{uri:item.image_link}} style={styles.backImg}>
+            {item.max_discount == null ? null:
+              <View style={styles.discountMain}> 
+                <Text style={[styles.txtb, { fontSize: hp('1.6%'), color: '#000' }]}>{item.max_discount}%</Text>
+              </View>
+            }
+              <Text style={styles.txtb}>{item.brand}</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          </View>
+       
+      </>
+    )
+  }
+
   return (
     <>
       <StatusBar backgroundColor={'#000'} />
       <View style={styles.MainFlex}>
-        <Topbar Textheading={'Inicio'} navigation={navigation} />
+        {/* <Topbar Textheading={'Inicio'} navigation={navigation} /> */}
         <ScrollView>
           <View style={styles.main1}>
             <View>
@@ -54,45 +171,16 @@ const Home = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-         
-          <ScrollView horizontal>
-            <View style={styles.Mainb}>
-              <TouchableOpacity style={styles.txmanb} onPress={() => navigation.navigate('BrandDetail')}>
-                <ImageBackground source={require('../../Assets/image2.png')} style={styles.backImg}>
-                  <View style={styles.discountMain}>
-                    <Text style={[styles.txtb,{fontSize:hp('1.6%'),color:'#000'}]}>-68%</Text>
-                  </View>
-                <Text style={styles.txtb}>220</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.txmanb} onPress={() => navigation.navigate('BrandDetail')}>
-                <ImageBackground source={require('../../Assets/image2.png')} style={styles.backImg}>
-                  <View style={styles.discountMain}>
-                    <Text style={[styles.txtb,{fontSize:hp('1.6%'),color:'#000'}]}>-68%</Text>
-                  </View>
-                <Text style={styles.txtb}>220</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.txmanb} onPress={() => navigation.navigate('BrandDetail')}>
-                <ImageBackground source={require('../../Assets/image2.png')} style={styles.backImg}>
-                  <View style={styles.discountMain}>
-                    <Text style={[styles.txtb,{fontSize:hp('1.6%'),color:'#000'}]}>-68%</Text>
-                  </View>
-                <Text style={styles.txtb}>220</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.txmanb} onPress={() => navigation.navigate('BrandDetail')}>
-                <ImageBackground source={require('../../Assets/image2.png')} style={styles.backImg}>
-                  <View style={styles.discountMain}>
-                    <Text style={[styles.txtb,{fontSize:hp('1.6%'),color:'#000'}]}>-68%</Text>
-                  </View>
-                <Text style={styles.txtb}>220</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
 
-         
+        
+
+          <FlatList
+            horizontal
+            data={dataBrand.slice(0, 10)}
+            renderItem={({ item, index }) =>
+              <Brand item={item} index={index}> </Brand>} />
+
+
           {/* <View style={styles.txtMain2}>
             <View>
               <Text style={styles.txtm}>
@@ -124,11 +212,11 @@ const Home = ({ navigation }) => {
           </ScrollView> */}
 
           <View style={styles.txtmnn}>
-          <TouchableOpacity style={styles.txttm} onPress={()=>navigation.navigate('Search')}>
+            <TouchableOpacity style={styles.txttm} onPress={() => navigation.navigate('Search')}>
               <Image style={styles.imm} source={require('../../Assets/view.png')} />
               <Text style={styles.txtve}>Ver Todo</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.txttm1} onPress={()=>navigation.navigate('Waterdrop')}>
+            <TouchableOpacity style={styles.txttm1} onPress={() => navigation.navigate('Waterdrop')}>
               <Image style={styles.imm} source={require('../../Assets/energy.png')} />
               <Text style={styles.txtti}>Tinder Moda</Text>
             </TouchableOpacity>
@@ -140,24 +228,25 @@ const Home = ({ navigation }) => {
             Ropa
           </Text>
           <View>
-            <Customcarousel 
-            data={data}
-            // data={data.slice(0,30)} 
-            navigation={navigation} />
+            <Customcarousel
+              data={ropaData.slice(0,10)}
+              // data={data.slice(0,30)} 
+              navigation={navigation} />
           </View>
           <View style={styles.card2}>
             <Text style={styles.tx}>
               Calzado
             </Text>
-            <Customcarousel data={data} navigation={navigation} />
+            <Customcarousel data={calzadoData.slice(0,10)} navigation={navigation} />
           </View>
           <View style={styles.card2}>
             <Text style={styles.tx}>
               Accesories
             </Text>
-            <Customcarousel data={data} navigation={navigation} />
+            <Customcarousel data={accessoryData.slice(0,10)} navigation={navigation} />
           </View>
         </ScrollView>
+        <Loader loaderVisible={loaderVisible} setLoaderVisible={setLoaderVisible} />
       </View>
     </>
   )
@@ -195,7 +284,7 @@ const styles = StyleSheet.create({
     color: White,
     fontSize: hp('2.1%'),
     marginVertical: wp('0.5%'),
-    fontWeight:'600'
+    fontWeight: '600'
   },
   txts: {
     color: LightYellow,
@@ -205,7 +294,7 @@ const styles = StyleSheet.create({
   tx: {
     color: White,
     fontSize: hp('2.1%'),
-    fontWeight:'600',
+    fontWeight: '600',
     marginLeft: wp('2%'),
   },
   card2: {
@@ -217,7 +306,7 @@ const styles = StyleSheet.create({
     fontSize: hp('2.6%'),
     marginTop: hp('1.2%'),
     marginBottom: wp('3%'),
-    fontWeight:'700',
+    fontWeight: '700',
     marginLeft: wp('2%'),
   },
   txta: {
@@ -271,34 +360,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-     backImg:{
-     height: hp('11.5%'),
+  backImg: {
+    height: hp('11.5%'),
     width: wp('32%'),
     borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-   txmanb: {
+  txmanb: {
     backgroundColor: '#999999',
     height: hp('11.5%'),
     width: wp('32%'),
     borderRadius: 5,
     margin: 5,
   },
-    discountMain:{
+  discountMain: {
     height: hp('3%'),
     width: wp('14%'),
-    borderRadius:18,
-     alignItems:'center',
-    justifyContent:'center',
-     backgroundColor:LightYellow,
-     marginTop:hp('1.4%'),
-    marginLeft:wp('1.9%'),
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: LightYellow,
+    marginTop: hp('-1.6%'),
+    alignSelf:'flex-start',
+    marginLeft: wp('1.9%'),
     //  margin:10
-   },
+  },
   txtb: {
-       color: White,
-    fontSize: hp('2.2%'),
+    color: White,
+    fontSize: hp('2%'),
     alignSelf: 'center',
-   fontWeight:'600'
+    fontWeight: '600',
+    textAlign:"center"
   },
   imm: {
     marginLeft: hp('2.5%'),

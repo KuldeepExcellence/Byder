@@ -5,14 +5,14 @@ import { LightYellow, MainBlack, White } from './ColorConst/ColorConst';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const Topbar = ({ Textheading, navigation }) => {
   return (
-    <View style={styles.man}>
+    // <View style={styles.man}>
       <View style={styles.Topimg}>
         <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
           <Image style={styles.navi} source={require('../Assets/navigation.png')} tintColor={LightYellow} />
         </TouchableOpacity>
         <Text style={styles.txtMain}>{Textheading}</Text>
       </View>
-    </View>
+    // </View>
   )
 }
 

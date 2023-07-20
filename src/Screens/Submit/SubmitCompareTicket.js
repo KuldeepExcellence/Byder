@@ -1,3 +1,4 @@
+
 import { StyleSheet, Text, View, StatusBar, ScrollView, Image,TouchableOpacity, TextInput } from 'react-native'
 import React,{useState} from 'react'
 import Topbarback from '../../Components/Topbarback'
@@ -6,7 +7,7 @@ import { MainBlack, White } from '../../Components/ColorConst/ColorConst';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 
-const SubirTicket = ({ navigation }) => {
+const SubmitCompareTicket = ({ navigation }) => {
   const [frontimage, setFrontimage] = useState(null);
     const [showoption, setShowoption] = useState(false);
 
@@ -24,9 +25,9 @@ const SubirTicket = ({ navigation }) => {
   return (
     <>
       <StatusBar backgroundColor={'#000'} />
-      <Topbarback Textheading={'Subir ticket'} navigation={navigation} />
+      <Topbarback Textheading={'Subir ticket de compra'} navigation={navigation} />
       <View style={styles.main2}>
-        <Text style={styles.subti}>Subir ticket</Text>
+        <Text style={styles.subti}>Subir ticket </Text>
 
         <View style={styles.searcmain}>
           <View style={styles.srchmainim}>
@@ -49,7 +50,7 @@ const SubirTicket = ({ navigation }) => {
     </>
   )
 }
-export default SubirTicket
+export default SubmitCompareTicket
 const styles = StyleSheet.create({
   main2: {
     flex: 1,

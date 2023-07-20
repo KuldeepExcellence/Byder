@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Dimensions, Image, StatusBar } from 'react-nati
 import Swiper from 'react-native-deck-swiper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { sidebarBlack, LightYellow } from '../../Components/ColorConst/ColorConst';
+import { sidebarBlack, LightYellow,MainBlack,White } from '../../Components/ColorConst/ColorConst';
 import Topbar from '../../Components/Topbar';
 
 
@@ -85,7 +85,7 @@ const photoCards = [
 
 const height = Dimensions.get('window').height
 const Waterdrop = ({ navigation }) => {
-  const useSwiper = useRef(null).current
+  const useSwiper = useRef()
   const handleOnSwipedLeft = () => useSwiper.swipeLeft()
   const handleOnSwipedTop = () => useSwiper.swipeTop()
   const handleOnSwipedRight = () => useSwiper.swipeRight()
@@ -130,22 +130,7 @@ const Waterdrop = ({ navigation }) => {
             >
               <Image source={require('../../Assets/heart.png')} tintColor='#79ff4d' style={{ height: 20, width: 20 }} />
             </TouchableOpacity>
-            {/* <TouchableOpacity
-            // name="star"
-            onPress={handleOnSwipedTop}
-            color="white"
-            backgroundColor="#3CA3FF"
-          >
-            <Image source={require('../../Assets/heart.png')} style={{ height: 40, width: 50 }} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            // name="heart"
-            onPress={handleOnSwipedRight}
-            color="white"
-            backgroundColor="#4CCC93"
-          >
-            <Image source={require('../../Assets/heart.png')} style={{ height: 40, width: 50 }} />
-          </TouchableOpacity> */}
+       
           </View>
         </View>
       </View>
@@ -159,7 +144,15 @@ const Waterdrop = ({ navigation }) => {
     <>
       <StatusBar backgroundColor={'#000'} />
       <View >
-        <Topbar Textheading={'Mi Perfil'} navigation={navigation} />
+        {/* <Topbar Textheading={'Explore'} navigation={navigation} /> */}
+        <View style={styles.man}>
+      <View style={styles.Topimg}>
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <Image style={styles.navi} source={require('../../Assets/navigation.png')} tintColor={LightYellow} />
+        </TouchableOpacity>
+        <Text style={styles.txtMain}>Explore</Text>
+      </View>
+    </View>
       </View>
       <View style={styles.MainFlex}>
         <View>
@@ -190,6 +183,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#15181e',
     padding: 10
+  },
+  man: {
+    backgroundColor: MainBlack,
+  },
+  Topimg: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: "flex-start",
+
+  },
+  txtMain: {
+    fontSize: hp('2.4%'),
+    color: White,
+    fontWeight: '700',
+    marginLeft: wp("35%")
+  },
+  navi: {
+    width: wp('8%'),
+    height: hp('5%'),
   },
   card: {
     /* Setting the height according to the screen height, it also could be fixed value or based on percentage. In this example, this worked well on Android and iOS. */
@@ -224,8 +236,6 @@ const styles = StyleSheet.create({
     width: wp('65%')
   },
   photoDescriptionContainer: {
-    // alignItems:"flex-start",
-    // justifyContent:'flex-start',
     paddingLeft: 15,
     paddingTop: 6
 

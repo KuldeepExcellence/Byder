@@ -10,7 +10,7 @@ const ReserveOrder = ({ navigation }) => {
         <>
 
             <StatusBar backgroundColor={'#000'} />
-            <Topbarback Textheading={'Mis Pedidos'} navigation={navigation} />
+            {/* <Topbarback Textheading={'Mis Pedidos'} navigation={navigation} /> */}
 
 
             <View style={styles.main2}>
@@ -21,10 +21,26 @@ const ReserveOrder = ({ navigation }) => {
 
                 <ScrollView>
                     <View style={styles.cardMain}>
-                        <TouchableOpacity style={styles.imgmain} onPress={()=>navigation.navigate('MyReserveDetail')}>
+                        <TouchableOpacity style={styles.imgmain} onPress={()=>navigation.navigate('MyTicketRevision')}>
                             <ImageBackground source={require('../../Assets/image1.png')} style={styles.backimg}>
                                 <View style={styles.discountMain}>
                                     <Text style={styles.txtb}>TICKET EN REVISION</Text>
+
+                                </View>
+                                <Text style={styles.txtTitle}>JW ANDERSON MEN POOLSLIDE ANCHOR ...</Text>
+                                <Text style={styles.txtPrice}>150$</Text>
+                            </ImageBackground>
+
+                        </TouchableOpacity>
+                    </View>
+
+                    <Text style={[styles.txtop, { marginTop: hp('2.1%'), fontSize: hp('2.1%') }]}>Reservado</Text>
+
+                    <View style={styles.cardMain}>
+                        <TouchableOpacity style={styles.imgmain} onPress={()=>navigation.navigate('MyTicketRevision')}>
+                            <ImageBackground source={require('../../Assets/image1.png')} style={styles.backimg}>
+                                <View style={[styles.discountMain,{ width: wp('25%'),}]}>
+                                    <Text style={styles.txtb}>RESERVADO</Text>
 
                                 </View>
                                 <Text style={styles.txtTitle}>JW ANDERSON MEN POOLSLIDE ANCHOR ...</Text>
@@ -45,7 +61,7 @@ export default ReserveOrder
 const styles = StyleSheet.create({
     main2: {
         flex: 1,
-        backgroundColor: '#221D28',
+        backgroundColor: '#15181e',
         padding: 10,
         // height: hp('124%'),
     },

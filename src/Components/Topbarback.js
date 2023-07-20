@@ -7,7 +7,7 @@ import { LightYellow } from './ColorConst/ColorConst';
 const Topbarback = ({Textheading,navigation}) => {
   return (
    <>
-   <View style={styles.man}>
+   {/* <View style={styles.man}> */}
     <View style={styles.Topimg}>
       <TouchableOpacity onPress={() => navigation.goBack()} >
     <Image style={styles.backim} source={require('../Assets/left.png')}  tintColor={LightYellow} />
@@ -15,7 +15,7 @@ const Topbarback = ({Textheading,navigation}) => {
  <Text style={styles.bac}>Back</Text>
     <Text  style={styles.txtMain}>{Textheading}</Text>
     </View>
-    </View>
+    {/* </View> */}
    </>
   )
 }

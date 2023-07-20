@@ -8,7 +8,7 @@ const EditPrefrence = ({ navigation }) => {
   return (
     <>
       <StatusBar backgroundColor={'#000'} />
-      <Topbarback Textheading={'Mis Preferencias'} navigation={navigation} />
+      {/* <Topbarback Textheading={'Mis Preferencias'} navigation={navigation} /> */}
       <ScrollView>
         <View style={styles.main}>
           <Text style={styles.txt}>Rellenando tus preferencias,Ias {'\n'}
