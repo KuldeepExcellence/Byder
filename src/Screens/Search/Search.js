@@ -12,6 +12,7 @@ import DetailSearch from '../../DetailSearch/DetailSearch'
 import BottomActionSheet from '../../Components/BottomActionSheet'
 import CustomBrandcategory from '../../Components/CustomBrandcategory'
 import CustombrandSubCat from '../../Components/CustombrandSubCat'
+import { Baseurl } from '../../Components/Baseurl'
 const data1 = [
   {
 
@@ -88,33 +89,103 @@ const Search = ({ data, navigation }) => {
     setGenderStatus('MUJER');
   };
 
+
+ 
+
+  const [searchdata, setsearchData] = useState([])
+
+  console.log(searchdata, 'searchdata')
+
+  
+  const product = () => {
+    fetch(Baseurl + '/api/product/', {
+      headers: {
+        "Accept": "application/json",
+        'Access-Control-Allow-Headers': '*',
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setsearchData(json)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  useEffect(() => {
+    product();
+  }, [])
+
+  const [showRedHeart, setShowRedHeart] = useState(false);
+
+  const toggleImage = () => {
+    setShowRedHeart((prevState) => !prevState);
+  };
+
   const Getdata = ({ item, index }) => {
-
-
-
+    const imageUrls = item.images.split('|');
     return (<>
 
       <View style={{ padding: 2 }}>
         <View style={styles.maincard}>
           <View style={styles.Imagecontainer}>
-            <View style={styles.mainpr}>
+            {/* <View style={styles.mainpr}>
               <View style={styles.per}>
-                <Text style={styles.txtper}>-40%</Text>
+                <Text style={styles.txtper}>{item.discount}%</Text>
               </View>
               <View>
                 <Image style={styles.heartim} source={require('../../Assets/heart.png')} />
               </View>
-            </View>
-            <ImageBackground source={item.image} style={styles.image} />
+            </View> */}
+            {/* <ImageBackground source={{uri:item.images}} style={styles.image} >
+            {item.discount == null ? null :
+            <View style={styles.per}>
+                <Text style={styles.txtper}>{item.discount}%</Text>
+              </View>
+               }
+              <TouchableOpacity onPress={toggleImage}>
+        {showRedHeart ? (
+          <Image style={styles.heartim} source={require('../../Assets/heart.png')} />
+        ) : (
+          <Image style={styles.heartim} source={require('../../Assets/redheart.png')} />
+        )}
+      </TouchableOpacity> */}
+              {/* <TouchableOpacity>
+              <Image style={styles.heartim} source={require('../../Assets/heart.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+              <Image style={styles.heartim} source={require('../../Assets/redheart.png')} />
+              </TouchableOpacity> */}
+              {/* </ImageBackground> */}
+              <View style={styles.Imagecontainer}>
+         
+            {imageUrls.map((imageUrl, index) => (
+             
+              <ImageBackground key={index} source={{ uri: item.images}} style={styles.image} >
+                {item.discount == null ? null :
+                  <View style={styles.per}>
+                    <Text style={styles.txtper}>{item.discount}%</Text>
+                  </View>
+                }
+                <View/>
+    
+                  <Image style={styles.heartim} source={require('../../Assets/heart.png')} />
+                
+              </ImageBackground>
+           
+            ))}
+             
+          </View>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('DetailSearch')}>
             <View style={{ marginLeft: hp('2%') }}>
-              <Text style={styles.textColor}>BRADHY</Text>
-              <Text style={styles.txtclr}>Leggings Mocha</Text>
-              <Text style={styles.txtdlr}>49.70 €</Text>
+              <Text style={styles.textColor}>{item.brand}</Text>
+              <Text style={styles.txtclr}>{item.name}</Text>
+              <Text style={styles.txtdlr}>{item.current_price} €</Text>
               <View style={styles.maintx}>
-                <Text style={styles.txtclr}>Centro</Text>
-                <Text style={styles.txtclr1}>7101.4km</Text>
+                <Text style={styles.txtclr}>{item.shop}</Text>
+                {/* <Text style={styles.txtclr1}>7101.4km</Text> */}
               </View>
             </View>
           </TouchableOpacity>
@@ -249,7 +320,7 @@ const Search = ({ data, navigation }) => {
 
           <FlatList
             showsHorizontalScrollIndicator={false}
-            data={data1}
+            data={searchdata}
             numColumns={2}
             // keyExtractor={host_sublist => host_sublist.id}
             renderItem={({ item, index }) =>
@@ -277,6 +348,30 @@ const styles = StyleSheet.create({
     borderColor: LightYellow,
 
   },
+  Imagecontainer: {
+    width: wp('46.5%'),
+    height: hp('20%'),
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    // alignItems: 'center',
+    overflow:'hidden',
+    justifyContent: 'center',
+    resizeMode: 'cover',
+  },
+  image: {
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    width: wp('46%'),
+    height: hp('19.9%'),
+  //  marginLeft:hp('1.3%'),
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
+    borderRadius: 30,
+    position: 'absolute',
+    // aspectRatio: 1,
+  },
+
   MainFlx: {
     flex: 1,
     backgroundColor: '#15181e',
@@ -339,7 +434,7 @@ const styles = StyleSheet.create({
   maincard: {
     width: wp('47%'),
     borderRadius: 10,
-    height: hp('33.5%'),
+    height: hp('36.5%'),
     backgroundColor: '#1e222b',
     marginBottom: wp('2%'),
   },
@@ -365,6 +460,8 @@ const styles = StyleSheet.create({
     width: wp('8.8%'),
     height: hp('2.5%'),
     borderRadius: 7,
+    marginLeft: hp('0.8%'),
+    marginTop: hp('0.8%'),
   },
   txtper: {
     fontSize: 12,
@@ -372,10 +469,17 @@ const styles = StyleSheet.create({
   heartim: {
     height: hp('3%'),
     width: wp('5.7%'),
+    // alignContent:'flex-end',
+    marginRight: hp('0.8%'),
+    marginTop: hp('0.8%'),
   },
   image: {
-    width: wp('44%'),
-    height: hp('19.5%'),
+    flexDirection:'row',
+    justifyContent: 'space-between',
+   
+    width: wp('42%'),
+    height: hp('18.5%'),
+   marginLeft:hp('1.5%'),
     // borderTopLeftRadius: 20,
     // borderTopRightRadius: 20,
     borderRadius: 30,

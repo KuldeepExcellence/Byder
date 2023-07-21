@@ -35,6 +35,11 @@ import MyOrderReseve from '../Screens/ReserveOrder/MyOrderReseve';
 
 import Topbar from '../Components/Topbar';
 import Topbarback from '../Components/Topbarback';
+import DiscountScreen from '../Screens/DiscountScreen/DiscountScreen';
+import Signup from '../Screens/Login/Signup';
+
+
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,6 +76,7 @@ function MyStack() {
       <Stack.Screen name="DetailSearch" component={DetailSearch} options={({navigation})=>({  headerTitle: () => <Topbarback Textheading="Adimatic" navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })} />
       <Stack.Screen name="BrandDetail" component={BrandDetail} options={({navigation})=>({  headerTitle: () => <Topbarback Textheading="220v" navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })}></Stack.Screen>
       <Stack.Screen name="BrandSeeAll" component={BrandSeeAll} options={({navigation})=>({  headerTitle: () => <Topbarback  navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })}></Stack.Screen>
+      <Stack.Screen name="DiscountScreen" component={DiscountScreen} options={({navigation})=>({  headerTitle: () => <Topbarback  navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })}></Stack.Screen>
       <Stack.Screen name="SeeInStore" component={SeeInStore} options={{ headerShown: false }}></Stack.Screen>
       <Stack.Screen name="CompareOnline" component={CompareOnline} options={{ headerShown: false }}></Stack.Screen>
       <Stack.Screen name="Submit" component={Submit} options={{ headerShown: false }}></Stack.Screen>
@@ -97,7 +103,9 @@ function MyProfileStack() {
       <Stack.Screen name="EditPrefrence" component={EditPrefrence} options={({navigation})=>({  headerTitle: () => <Topbarback Textheading="Mis Preferencias" navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })} />
       <Stack.Screen name="MyTicketRevision" component={MyTicketRevision} options={({navigation})=>({  headerTitle: () => <Topbarback navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })} />
       <Stack.Screen name="MyOrderReseve" component={MyOrderReseve} options={{ headerShown: false }}></Stack.Screen>
-      <Stack.Screen name="Login" component={Login} options={({navigation})=>({  headerTitle: () => <Topbarback navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })} />
+      {/* <Stack.Screen name="Login" component={Login} options={({navigation})=>({  headerTitle: () => <Topbarback navigation={navigation} />,headerStyle: {backgroundColor: '#000', height: 40, }, headerLeft: null,  })} /> */}
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
+      <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
       <Stack.Screen name="OtpVerify" component={OtpVerify} options={{ headerShown: false }}></Stack.Screen>
     </Stack.Navigator>
   );

@@ -149,14 +149,15 @@ const Home = ({ navigation }) => {
       <View style={styles.MainFlex}>
         {/* <Topbar Textheading={'Inicio'} navigation={navigation} /> */}
         <ScrollView>
-          <View style={styles.main1}>
+        <TouchableOpacity style={styles.main1} onPress={() => navigation.navigate('DiscountScreen')}>
+          
             <View>
               <Text style={styles.txt}>REBAJAS</Text>
             </View>
             <View>
               <Image style={styles.jack} source={require('../../Assets/jacket.png')} />
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.txtMain2}>
             <View>
               <Text style={styles.txtm}>

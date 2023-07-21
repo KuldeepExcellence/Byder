@@ -5,9 +5,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { ALERT_TYPE, Dialog, Root, Toast } from 'react-native-alert-notification';
 import { Baseurl } from '../../Components/Baseurl';
 
-
 const Login = ({ navigation }) => {
 
+  const [userName, setUserName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
       formData.append('password', password)
 
 
-      fetch(base + '/api/login/', {
+      fetch(base + '/api/signup/', {
         method: 'Post',
         headers: {
           "Accept": "application/json",
@@ -62,60 +62,70 @@ const Login = ({ navigation }) => {
 
   }
 
+
   return (
     <>
       <Root>
-        <View style={styles.main}>
-          <ScrollView>
+      <View style={styles.main}>
+        <ScrollView>
 
-            <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignSelf: 'flex-end' }}>
-              <Image style={styles.imgcl} source={require('../../Assets/close.png')} />
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{ alignSelf: 'flex-end' }}>
+            <Image style={styles.imgcl} source={require('../../Assets/close.png')} />
+          </TouchableOpacity>
+          <View style={styles.mainimg}>
+            <Image style={styles.img} source={require('../../Assets/Logowithout.png')} />
+
+          </View>
+          <View style={styles.txtLogo}>
+            <Text style={styles.txtby}>Byder</Text>
+            <Text style={styles.txtEn}>Encuentra prendas cerca de ti. Introduce tu correo para create una cuenta</Text>
+          </View>
+           <View style={styles.inputmain}>
+            <TextInput
+              style={styles.input}
+              onChangeText={setUserName}
+              value={userName}
+              placeholder="Username"
+              placeholderTextColor={MainBlack}
+            />
+          </View>
+          <View style={styles.inputmain}>
+            <TextInput
+              style={styles.input}
+              onChangeText={setEmail}
+              value={email}
+              placeholder="Email address"
+              placeholderTextColor={MainBlack}
+            />
+          </View>
+          <View style={styles.inputmain}>
+            <TextInput
+              style={styles.input}
+              onChangeText={setPassword}
+              value={password}
+              placeholder="Password"
+              placeholderTextColor={MainBlack}
+            />
+          </View>
+         
+          <TouchableOpacity onPress={() => PostData()} style={styles.mainconti}>
+              <Text style={styles.txtconti}>Continue</Text>
             </TouchableOpacity>
-            <View style={styles.mainimg}>
-              <Image style={styles.img} source={require('../../Assets/Logowithout.png')} />
+       
+          <View style={styles.mainsign}>
+            <Image style={styles.imggo} source={require('../../Assets/googlelogo.png')} />
+            <Text style={styles.txtsign}>Sign in with Google</Text>
+          </View>
+          <View style={{alignitems:"center",justifyContent:"center",flexDirection:'row'}}>
 
-            </View>
-            <View style={styles.txtLogo}>
-              <Text style={styles.txtby}>Byder</Text>
-              <Text style={styles.txtEn}>Encuentra prendas cerca de ti. Introduce tu correo para create una cuenta</Text>
-            </View>
-            <View style={styles.inputmain}>
-              <TextInput
-                style={styles.input}
-                onChangeText={setEmail}
-                value={email}
-                placeholder="Email address"
-                placeholderTextColor={MainBlack}
-              />
-            </View>
-            <View style={styles.inputmain}>
-              <TextInput
-                style={styles.input}
-                onChangeText={setPassword}
-                value={password}
-                placeholder="Password"
-                placeholderTextColor={MainBlack}
-              />
-            </View>
-            
-              <TouchableOpacity onPress={() => PostData()} style={styles.mainconti}>
-                <Text style={styles.txtconti}>Continue</Text>
-              </TouchableOpacity>
-            
-            <View style={styles.mainsign}>
-              <Image style={styles.imggo} source={require('../../Assets/googlelogo.png')} />
-              <Text style={styles.txtsign}>Sign in with Google</Text>
-            </View>
-            <View style={{ alignitems: "center", justifyContent: "center", flexDirection: 'row' }}>
-
-              <Text style={styles.smltxt}>Don't have an Account  </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-                <Text style={[styles.smltxt, { color: '#ff7674' }]}>Signup</Text>
-              </TouchableOpacity>
-
-            </View>
-          </ScrollView>
-        </View>
+          <Text style={styles.smltxt}>Allready have an Account  </Text>
+          <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
+          <Text style={[styles.smltxt,{color:'#ff7674'}]}>Login</Text>
+          </TouchableOpacity>
+       
+          </View>
+        </ScrollView>
+      </View>
       </Root>
     </>
   )
@@ -151,10 +161,10 @@ const styles = StyleSheet.create({
     fontSize: hp('8%'),
     fontWeight: '800',
     alignSelf: "center",
-    marginTop: hp('7%'),
+    marginTop: hp('4%'),
   },
   txtEn: {
-
+   
     color: '#404040',
     fontSize: hp('2.2%'),
     alignSelf: 'center',
@@ -193,9 +203,9 @@ const styles = StyleSheet.create({
     height: hp('6%'),
     width: wp('85%'),
     borderRadius: 8,
-    marginTop: hp('2%'),
+    marginTop: hp('2%'), 
   },
-  smltxt: {
+  smltxt:{
     color: '#000',
     fontSize: hp('2%'),
     marginTop: hp('2%'),

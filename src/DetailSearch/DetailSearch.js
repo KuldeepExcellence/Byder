@@ -15,6 +15,8 @@ import Topbarback from '../Components/Topbarback'
 const DetailSearch = ({ navigation, route }) => {
     const { item } = route.params
 
+    const sizesArray = item.sizes.split('|');
+
     console.log(item, '111item')
 
 
@@ -56,9 +58,13 @@ const DetailSearch = ({ navigation, route }) => {
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.txtt}>Tallas disponibles</Text>
-                    <View style={styles.txma1}>
-                        <Text style={styles.txttt}>42</Text>
+                    <View style={{flexDirection:'row',}}>
+                    {sizesArray.map((size, index) => (
+                    <View key={index}  style={styles.txma1}>
+                        <Text style={styles.txttt}>{size}</Text>
                     </View>
+                      ))}
+                      </View>
                     <Text style={styles.txtadima}>{item.name}</Text>
                     <Text style={styles.txtADDI}>{item.brand}</Text>
                     <View style={styles.txt6main}>

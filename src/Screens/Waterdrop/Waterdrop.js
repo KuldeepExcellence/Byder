@@ -1,12 +1,12 @@
 
-import React, { useRef } from 'react'
+import React, {useState, useRef,useEffect, createRef } from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, StatusBar } from 'react-native'
 import Swiper from 'react-native-deck-swiper'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { sidebarBlack, LightYellow,MainBlack,White } from '../../Components/ColorConst/ColorConst';
 import Topbar from '../../Components/Topbar';
-
+import { Baseurl } from '../../Components/Baseurl';
 
 const photoCards = [
   {
@@ -91,25 +91,56 @@ const Waterdrop = ({ navigation }) => {
   const handleOnSwipedRight = () => useSwiper.swipeRight()
 
 
-  const Card = ({ card }) => (
+  const [searchdata, setsearchData] = useState([])
 
+  console.log(searchdata, 'searchdata')
+
+  
+  const product = () => {
+    fetch(Baseurl + '/api/product/', {
+      headers: {
+        "Accept": "application/json",
+        'Access-Control-Allow-Headers': '*',
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((response) => response.json())
+      .then((json) => {
+        setsearchData(json)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  useEffect(() => {
+    product();
+  }, [])
+
+
+
+  const Card = ({ card }) => {
+    const imageUrls = card.images.split('|')
+    return(
     <View>
       <View activeOpacity={1} style={styles.card}>
+      
         <View style={styles.imgView}>
+        {imageUrls.map((imageUrl, index) => (
           <Image
             style={styles.image}
-            source={card.photo}
+            source={card.images}
             resizeMode="cover"
           />
-
+          ))}
         </View>
+           
 
         <View style={styles.photoDescriptionContainer}>
           <Text style={styles.text}>
             {`${card.name}, ${card.age}`}
           </Text>
           <View style={styles.txtprlocation}>
-            <Text style={styles.pricetxt}>112.00 $</Text>
+            <Text style={styles.pricetxt}>{card.current_price} $</Text>
             <Text style={styles.locationtxt}>A 75.32155</Text>
           </View>
           <View style={styles.hrWidth} />
@@ -136,7 +167,8 @@ const Waterdrop = ({ navigation }) => {
       </View>
 
     </View>
-  )
+    )
+    }
 
 
 
@@ -162,7 +194,7 @@ const Waterdrop = ({ navigation }) => {
           ref={useSwiper}
           animateCardOpacity
           containerStyle={styles.container}
-          cards={photoCards}
+          cards={searchdata}
           renderCard={card => <Card card={card} />}
           cardIndex={0}
           backgroundColor="white"
